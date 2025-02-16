@@ -70,12 +70,12 @@ m97=MOD%97;
 #include "MAKES.H" // build OK and OKOK arrays; see page 8
 
 
-for(i31=0;i31<7;++i31)
-for(i37=0;i37<13;++i37)
-if(i37-i31<=10&&i31-i37<=4) // to make sure the good intervals intersect in an AP of length at least 26
+for(i31=2;i31<5;++i31)
+for(i37=2;i37<11;++i37)
+// if(i37-i31<=10&&i31-i37<=4) // to make sure the good intervals intersect in an AP of length at least 26
 					    // (more generally, we need i_q - i_p <= q - 27)
-for(i41=0;i41<17;++i41)
-if(i41-i31<=14&&i41-i37<=14&&i31-i41<=4&&i37-i41<=10) // see above
+for(i41=2;i41<15;++i41)
+// if(i41-i31<=14&&i41-i37<=14&&i31-i41<=4&&i37-i41<=10) // see above
 for(i3=0;i3<2;++i3)
 for(i5=0;i5<4;++i5)
 { 
@@ -83,18 +83,18 @@ for(i5=0;i5<4;++i5)
 
 
 
-n43=(n0+i3*S3+i5*S5+i31*S31+i37*S37+i41*S41)%MOD;
+n43=(n0+i3*S3+i5*S5+i31*S31+i37*S37+i41*S41+2*S43+2*S47+2*S53+2*S59)%MOD;
 {
 
-for(i43=(PRIME5-24);i43>0;i43--)
+for(i43=(PRIME5-26);i43>2;i43--)
 {
 
 n47=n43;
-for(i47=(PRIME6-24);i47>0;i47--)
+for(i47=(PRIME6-26);i47>2;i47--)
 {
 
 n53=n47;
-for(i53=(PRIME7-24);i53>0;i53--)
+for(i53=(PRIME7-26);i53>2;i53--)
 {
 int r61, r67, r71, r73, r79, r83, r89, r97;
 
@@ -107,7 +107,7 @@ r79=n59%79;
 r83=n59%83;
 r89=n59%89;
 r97=n59%97;
-for(i59=(PRIME8-24);i59>0;i59--)
+for(i59=(PRIME8-26);i59>2;i59--)
 {
 
 #include "SITO.H" // bit mask sieving for primes from 61 to 331
@@ -159,7 +159,7 @@ ReportSolution(k,K,m+STEP);
 }
 
 }
-if(i59>1){
+if(i59>3){
 n59+=S59;
 r61+=s61;
 r67+=s67;
