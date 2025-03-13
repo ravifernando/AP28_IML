@@ -5,8 +5,8 @@ q_j’s : 2,3,5,29,31,41,43,47,53,59,61
 29 is treated special
 
 To create a CONST file under those specifications, set the inputs as the following:
-commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 37 }
-primesForCandidates = { 2, 3, 5, 29, 31, 41, 43, 47, 53, 59, 61 }
+commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 37 } (all p_i's)
+primesForCandidates = { 2, 3, 5, 29, 31, 41, 43, 47, 53, 59, 61 } (all q_j's)
 specialPrime = 29
 multiply = 3
 bitmaskPrime = 331
