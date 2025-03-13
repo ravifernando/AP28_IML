@@ -99,7 +99,7 @@ std::vector<bool> sieveOfEratosthenes(const long long n) {
 
 long long mult(const long long a, const long long b) {
   if (a < 0 || b < 0) {
-    std::cout << "ERROR: Invalid inputs for the mult function; this function only takes nonnegative integers."
+    std::cout << "ERROR: Invalid inputs for the mult function; this function only takes nonnegative integers.";
   }
   long long c = a * b;
   if (a != 0 && c / a != b) {
@@ -182,10 +182,6 @@ void constWriter(const std::string& filename,
       std::cout << "ERROR: Invalid special prime." << std::endl;
       abort();
     }
-    for (long long p : primesForCandidates) std::cout << p << " ";
-    std::cout << std::endl;
-    for (long long p : congruences) std::cout << p << " ";
-    std::cout << std::endl;
     long long N0 = findMinX(primesForCandidates, congruences);
     writeToFile << "#define N0 " << N0 << "LL\n";
   }
