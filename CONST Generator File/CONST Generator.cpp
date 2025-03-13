@@ -99,7 +99,7 @@ std::vector<bool> sieveOfEratosthenes(const long long n) {
 
 long long mult(const long long a, const long long b) {
   if (a < 0 || b < 0) {
-    std::cout << "ERROR: Invalid inputs for the mult function; this function only takes nonnegative integers.";
+    std::cout << "ERROR: Invalid inputs for the mult function; this function only takes nonnegative integers." << std::endl;
   }
   long long c = a * b;
   if (a != 0 && c / a != b) {
