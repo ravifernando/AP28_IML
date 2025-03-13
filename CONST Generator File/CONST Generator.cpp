@@ -150,7 +150,7 @@ void constWriter(const std::string& filename,
   writeToFile.open(filename);
 
   // Calculates the common difference and writes to file
-  // The name of this variable is PRIM + the largest prime factor of MOD (last element of modDivisors)
+  // The name of this variable is PRIM + the largest prime factor of MOD (last element of the sorted commonDifferenceDivisors)
   long long commonDifference = 1;
   for (const long long p : commonDifferenceDivisors) commonDifference = mult(commonDifference, p);
   writeToFile << "#define PRIM" << commonDifferenceDivisors.at(commonDifferenceDivisors.size() - 1) << " " << commonDifference << "LL\n";
