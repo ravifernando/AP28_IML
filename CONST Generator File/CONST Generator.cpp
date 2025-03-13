@@ -98,6 +98,9 @@ std::vector<bool> sieveOfEratosthenes(const long long n) {
 }
 
 long long mult(const long long a, const long long b) {
+  if (a < 0 || b < 0) {
+    std::cout << "ERROR: Invalid inputs for the mult function; this function only takes nonnegative integers."
+  }
   long long c = a * b;
   if (a != 0 && c / a != b) {
     std::cout << "ERROR: Overflow in multiplication." << std::endl;
@@ -131,7 +134,7 @@ void constWriter(const std::string& filename,
     abort();
   }
   if (bitmaskPrime <= 1 || sievePrime <= 1) {
-    std::cout << "ERROR: bitmaskPrime or sievePrime is less than or greater to 1." << std::endl;
+    std::cout << "ERROR: bitmaskPrime or sievePrime is less than or equal to 1." << std::endl;
     abort();
   }
 
