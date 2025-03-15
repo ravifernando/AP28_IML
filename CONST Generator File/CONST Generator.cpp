@@ -122,7 +122,7 @@ void constWriter(const std::string& filename,
     std::cout << "ERROR: specialPrime is nonzero, but multiply is 0." << std::endl;
     abort();
   } else if (specialPrime < 0) {
-    std::cout << "ERROR: specialPrime is not negative. This input should be set to 0 if there is no special prime." << std::endl;
+    std::cout << "ERROR: specialPrime is negative. This input should be set to 0 if there is no special prime." << std::endl;
     abort();
   } else if (specialPrime == 0 && multiply != 0) {
     std::cout << "ERROR: specialPrime is 0, but multiply is nonzero. The multiply input should be set to 0" << std::endl;
