@@ -1,36 +1,22 @@
 #include "CONST_kp.H"
 #include <stdio.h>
 
-void SearchAP28_kp(int K, int p, int SHIFT)
+void SearchAP28_kp(int K, constants* kp, int SHIFT)
 {
-
-printf("%lld\n", COMMONDIFF);
-printf("%lld\n", PRIME1);
-printf("%lld\n", PRIME2);
-printf("%lld\n", PRIME3);
-printf("%lld\n", PRIME4);
-printf("%lld\n", PRIME5);
-printf("%lld\n", PRIME6);
-printf("%lld\n", PRIME7);
-printf("%lld\n", PRIME8);
-printf("%lld\n", MOD);
-printf("%lld\n", N0);
-printf("%lld\n", N30);
-printf("%lld\n", S3);
-printf("%lld\n", S5);
-printf("%lld\n", PRES2);
-printf("%lld\n", PRES3);
-printf("%lld\n", PRES4);
-printf("%lld\n", PRES5);
-printf("%lld\n", PRES6);
-printf("%lld\n", PRES7);
-printf("%lld\n", PRES8);
-printf("%lld\n", PRES9);
-
 
 long long n, n43, n47, n53, n59, n61; // Added n61 due to there being more inner loops (more additions)
 int iPRIME4, iPRIME5, iPRIME6, iPRIME7, iPRIME8;
 int i3, i5, iPRIME1, iPRIME2, iPRIME3;
+
+int p = kp->p;
+int PRIME1 = kp->PRIME1;
+int PRIME2 = kp->PRIME2;
+int PRIME3 = kp->PRIME3;
+int PRIME4 = kp->PRIME4;
+int PRIME5 = kp->PRIME5;
+int PRIME6 = kp->PRIME6;
+int PRIME7 = kp->PRIME7;
+int PRIME8 = kp->PRIME8;
 
 int i, j, jj;
 
@@ -40,7 +26,44 @@ long long STEP4;
 long long n0;
 long long sito;
 
+long long COMMONDIFF = kp->COMMONDIFF;
+long long MOD = kp->MOD;
+long long N0 = kp->N0;
+long long N30 = kp->N30;
+long long S3 = kp->S3;
+long long S5 = kp->S5;
+long long PRES2 = kp->PRES2;
+long long PRES3 = kp->PRES3;
+long long PRES4 = kp->PRES4;
+long long PRES5 = kp->PRES5;
+long long PRES6 = kp->PRES6;
+long long PRES7 = kp->PRES7;
+long long PRES8 = kp->PRES8;
+long long PRES9 = kp->PRES9;
 
+printf("p: %d\n", p);
+printf("COMMONDIFF: %lld\n", COMMONDIFF);
+printf("PRIME1: %d\n", PRIME1);
+printf("PRIME2: %d\n", PRIME2);
+printf("PRIME3: %d\n", PRIME3);
+printf("PRIME4: %d\n", PRIME4);
+printf("PRIME5: %d\n", PRIME5);
+printf("PRIME6: %d\n", PRIME6);
+printf("PRIME7: %d\n", PRIME7);
+printf("PRIME8: %d\n", PRIME8);
+printf("MOD: %lld\n", MOD);
+printf("N0: %lld\n", N0);
+printf("N30: %lld\n", N30);
+printf("S3: %lld\n", S3);
+printf("S5: %lld\n", S5);
+printf("PRES2: %lld\n", PRES2);
+printf("PRES3: %lld\n", PRES3);
+printf("PRES4: %lld\n", PRES4);
+printf("PRES5: %lld\n", PRES5);
+printf("PRES6: %lld\n", PRES6);
+printf("PRES7: %lld\n", PRES7);
+printf("PRES8: %lld\n", PRES8);
+printf("PRES9: %lld\n", PRES9);
 
 long long SPRIME1, SPRIME2, SPRIME3, SPRIME4, SPRIME5, SPRIME6, SPRIME7, SPRIME8; // Added S61 (now SPRIME8)
 
