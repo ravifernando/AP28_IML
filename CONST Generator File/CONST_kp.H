@@ -1,31 +1,31 @@
 struct constants {
-  int p;
-  long long COMMONDIFF;
-  int PRIME1;
-  int PRIME2;
-  int PRIME3;
-  int PRIME4;
-  int PRIME5;
-  int PRIME6;
-  int PRIME7;
-  int PRIME8;
-  long long MOD;
-  long long N0;
-  long long N30;
-  long long S3;
-  long long S5;
-  long long PRES2;
-  long long PRES3;
-  long long PRES4;
-  long long PRES5;
-  long long PRES6;
-  long long PRES7;
-  long long PRES8;
-  long long PRES9;
+    int p;
+    long long COMMONDIFF;
+    int PRIME1;
+    int PRIME2;
+    int PRIME3;
+    int PRIME4;
+    int PRIME5;
+    int PRIME6;
+    int PRIME7;
+    int PRIME8;
+    long long MOD;
+    long long N0;
+    long long N30;
+    long long S3;
+    long long S5;
+    long long PRES2;
+    long long PRES3;
+    long long PRES4;
+    long long PRES5;
+    long long PRES6;
+    long long PRES7;
+    long long PRES8;
+    long long PRES9;
 };
 
 constants k29 = {
-  29,
+29,
 6469693230,
 31,
 37,
@@ -51,7 +51,7 @@ constants k29 = {
 };
 
 constants k31 = {
-  31,
+31,
 6915878970,
 29,
 37,
@@ -77,7 +77,7 @@ constants k31 = {
 };
 
 constants k37 = {
-  37,
+37,
 8254436190,
 29,
 31,
@@ -103,7 +103,7 @@ constants k37 = {
 };
 
 constants k41 = {
-  41,
+41,
 9146807670,
 29,
 31,
@@ -129,7 +129,7 @@ constants k41 = {
 };
 
 constants k43 = {
-  43,
+43,
 9592993410,
 29,
 31,
@@ -155,7 +155,7 @@ constants k43 = {
 };
 
 constants k47 = {
-  47,
+47,
 10485364890,
 29,
 31,
@@ -181,7 +181,7 @@ constants k47 = {
 };
 
 constants k53 = {
-  53,
+53,
 11823922110,
 29,
 31,
@@ -207,7 +207,7 @@ constants k53 = {
 };
 
 constants k59 = {
-  59,
+59,
 13162479330,
 29,
 31,
