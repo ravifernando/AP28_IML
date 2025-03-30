@@ -6,8 +6,6 @@
 #include <sys/time.h>
 #include <sys/types.h>
 #include <sys/resource.h>
-#include <vector>
-#include <algorithm>
 
 #include "PrimeQ64.h"
 //#include "PrimeQ32.h" 
@@ -39,6 +37,7 @@ void ReportSolution(int AP_Length,int difference,long long First_Term){
 
 
 
+#include "CONST_kp.H"
 #include "AP28_kp.h"
 
 
@@ -47,7 +46,7 @@ int main(int argc, char *argv[])
 {
     mytime = microtime();
 
-    SearchAP28_kp(1, k29, 0);
+    SearchAP28_kp(1, &k29, 0);
 
     totaltime=microtime()-mytime;
     printf("TIME: %lld microseconds\n",totaltime);
