@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void SearchAP28_kp(int K, struct constants* kp, int SHIFT)
+void SearchAP28_kp(int K, struct Constants* kp, int SHIFT)
 {
 
 long long n, n43, n47, n53, n59, n61; // Added n61 due to there being more inner loops (more additions)
@@ -252,9 +252,7 @@ m97=MOD%97;
 // Since we want a tighter sieve, I made all bounds be from 0 to (p-28) for the outer loops.
 for(iPRIME1=0;iPRIME1<(PRIME1-28);++iPRIME1)
 for(iPRIME2=0;iPRIME2<(PRIME2-28);++iPRIME2)
-if(iPRIME2-iPRIME1<=(PRIME2-27)&&iPRIME1-iPRIME2<=(PRIME1-27)) // Followed i_q - i_p <= q - 27
 for(iPRIME3=0;iPRIME3<(PRIME3-28);++iPRIME3)
-if(iPRIME3-iPRIME1<=(PRIME3-27)&&iPRIME3-iPRIME2<=(PRIME3-27)&&iPRIME1-iPRIME3<=(PRIME1-27)&&iPRIME2-iPRIME3<=(PRIME2-27)) // Followed i_q - i_p <= q - 27
 for(i3=0;i3<2;++i3)
 for(i5=0;i5<4;++i5)
 {

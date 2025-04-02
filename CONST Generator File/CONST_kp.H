@@ -1,4 +1,4 @@
-struct constants {
+struct Constants {
     int p;
     long long COMMONDIFF;
     int PRIME1;
@@ -24,7 +24,7 @@ struct constants {
     long long PRES9;
 };
 
-struct constants k29 = {
+struct Constants k29 = {
 29,
 6469693230,
 31,
@@ -50,7 +50,7 @@ struct constants k29 = {
 124821891603780
 };
 
-struct constants k31 = {
+struct Constants k31 = {
 31,
 6915878970,
 29,
@@ -76,7 +76,7 @@ struct constants k31 = {
 408691032186570
 };
 
-struct constants k37 = {
+struct Constants k37 = {
 37,
 8254436190,
 29,
@@ -102,7 +102,7 @@ struct constants k37 = {
 321452516215140
 };
 
-struct constants k41 = {
+struct Constants k41 = {
 41,
 9146807670,
 29,
@@ -128,7 +128,7 @@ struct constants k41 = {
 94594987539450
 };
 
-struct constants k43 = {
+struct Constants k43 = {
 43,
 9592993410,
 29,
@@ -154,7 +154,7 @@ struct constants k43 = {
 18039044135430
 };
 
-struct constants k47 = {
+struct Constants k47 = {
 47,
 10485364890,
 29,
@@ -180,7 +180,7 @@ struct constants k47 = {
 258559632607830
 };
 
-struct constants k53 = {
+struct Constants k53 = {
 53,
 11823922110,
 29,
@@ -206,7 +206,7 @@ struct constants k53 = {
 190260861730290
 };
 
-struct constants k59 = {
+struct Constants k59 = {
 59,
 13162479330,
 29,
