@@ -1,4 +1,5 @@
-sito=OKOK67[r67];
+if (q == 0) { sito=OKOK67[r67]; }
+else { sito=OKOK71[r71]; }
 if(sito&=OKOK71[r71])
 if(sito&=OKOK73[r73])
 if(sito&=OKOK79[r79])

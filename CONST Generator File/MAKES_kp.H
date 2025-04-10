@@ -1,4 +1,4 @@
-for(j=0;j<67;j++)OK67[j]=1;
+if (q == 0) { for(j=0;j<67;j++)OK67[j]=1; }
 for(j=40;j<=67;j++)OK67[(j*(STEP%67))%67]=0;
 for(j=0;j<71;j++)OK71[j]=1;
 for(j=44;j<=71;j++)OK71[(j*(STEP%71))%71]=0;
@@ -162,10 +162,12 @@ for(j=0;j<523;j++)OK523[j]=1;
 for(j=496;j<=523;j++)OK523[(j*(STEP%523))%523]=0;
 for(j=0;j<541;j++)OK541[j]=1;
 for(j=514;j<=541;j++)OK541[(j*(STEP%541))%541]=0;
+if (q == 0) {
 for(j=0;j<67;j++)OKOK67[j]=0;
 for(j=0;j<67;j++)
 for(jj=0;jj<64;jj++)
 OKOK67[j]|=(((long long)OK67[(j+(jj+SHIFT)*MOD)%67])<<jj);
+}
 for(j=0;j<71;j++)OKOK71[j]=0;
 for(j=0;j<71;j++)
 for(jj=0;jj<64;jj++)

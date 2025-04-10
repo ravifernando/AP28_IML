@@ -1,5 +1,6 @@
 struct Constants {
     int p;
+    int q;
     long long COMMONDIFF;
     int PRIME1;
     int PRIME2;
@@ -26,6 +27,7 @@ struct Constants {
 
 struct Constants k29 = {
 29,
+0,
 6469693230,
 31,
 37,
@@ -52,6 +54,7 @@ struct Constants k29 = {
 
 struct Constants k31 = {
 31,
+0,
 6915878970,
 29,
 37,
@@ -78,6 +81,7 @@ struct Constants k31 = {
 
 struct Constants k37 = {
 37,
+0,
 8254436190,
 29,
 31,
@@ -104,6 +108,7 @@ struct Constants k37 = {
 
 struct Constants k41 = {
 41,
+0,
 9146807670,
 29,
 31,
@@ -130,6 +135,7 @@ struct Constants k41 = {
 
 struct Constants k43 = {
 43,
+0,
 9592993410,
 29,
 31,
@@ -156,6 +162,7 @@ struct Constants k43 = {
 
 struct Constants k47 = {
 47,
+0,
 10485364890,
 29,
 31,
@@ -182,6 +189,7 @@ struct Constants k47 = {
 
 struct Constants k53 = {
 53,
+0,
 11823922110,
 29,
 31,
@@ -208,6 +216,7 @@ struct Constants k53 = {
 
 struct Constants k59 = {
 59,
+0,
 13162479330,
 29,
 31,
@@ -231,3 +240,27 @@ struct Constants k59 = {
 226973518231050,
 227883066027240
 };
+
+struct Constants k31_29 = {
+31,
+29,
+200560490130,
+37,
+41,
+43,
+47,
+53,
+61,
+67,
+19922950518810,
+200560490130,
+15274262064421,
+13281967012540,
+11953770311286,
+5384581221300,
+9232586825790,
+10193137474740,
+9749528977290,
+15036189070800,
+2939451715890,
+7433936760750,

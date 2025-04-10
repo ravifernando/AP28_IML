@@ -8,6 +8,7 @@ int iPRIME4, iPRIME5, iPRIME6, iPRIME7, iPRIME8;
 int i3, i5, iPRIME1, iPRIME2, iPRIME3;
 
 int p = kp->p;
+int q = kp->q;
 int PRIME1 = kp->PRIME1;
 int PRIME2 = kp->PRIME2;
 int PRIME3 = kp->PRIME3;
@@ -40,29 +41,30 @@ long long PRES7 = kp->PRES7;
 long long PRES8 = kp->PRES8;
 long long PRES9 = kp->PRES9;
 
-printf("p: %d\n", p);
-printf("COMMONDIFF: %lld\n", COMMONDIFF);
-printf("PRIME1: %d\n", PRIME1);
-printf("PRIME2: %d\n", PRIME2);
-printf("PRIME3: %d\n", PRIME3);
-printf("PRIME4: %d\n", PRIME4);
-printf("PRIME5: %d\n", PRIME5);
-printf("PRIME6: %d\n", PRIME6);
-printf("PRIME7: %d\n", PRIME7);
-printf("PRIME8: %d\n", PRIME8);
-printf("MOD: %lld\n", MOD);
-printf("N0: %lld\n", N0);
-printf("N30: %lld\n", N30);
-printf("S3: %lld\n", S3);
-printf("S5: %lld\n", S5);
-printf("PRES2: %lld\n", PRES2);
-printf("PRES3: %lld\n", PRES3);
-printf("PRES4: %lld\n", PRES4);
-printf("PRES5: %lld\n", PRES5);
-printf("PRES6: %lld\n", PRES6);
-printf("PRES7: %lld\n", PRES7);
-printf("PRES8: %lld\n", PRES8);
-printf("PRES9: %lld\n", PRES9);
+// printf("p: %d\n", p);
+// printf("q: %d\n", q);
+// printf("COMMONDIFF: %lld\n", COMMONDIFF);
+// printf("PRIME1: %d\n", PRIME1);
+// printf("PRIME2: %d\n", PRIME2);
+// printf("PRIME3: %d\n", PRIME3);
+// printf("PRIME4: %d\n", PRIME4);
+// printf("PRIME5: %d\n", PRIME5);
+// printf("PRIME6: %d\n", PRIME6);
+// printf("PRIME7: %d\n", PRIME7);
+// printf("PRIME8: %d\n", PRIME8);
+// printf("MOD: %lld\n", MOD);
+// printf("N0: %lld\n", N0);
+// printf("N30: %lld\n", N30);
+// printf("S3: %lld\n", S3);
+// printf("S5: %lld\n", S5);
+// printf("PRES2: %lld\n", PRES2);
+// printf("PRES3: %lld\n", PRES3);
+// printf("PRES4: %lld\n", PRES4);
+// printf("PRES5: %lld\n", PRES5);
+// printf("PRES6: %lld\n", PRES6);
+// printf("PRES7: %lld\n", PRES7);
+// printf("PRES8: %lld\n", PRES8);
+// printf("PRES9: %lld\n", PRES9);
 
 long long SPRIME1, SPRIME2, SPRIME3, SPRIME4, SPRIME5, SPRIME6, SPRIME7, SPRIME8; // Added S61 (now SPRIME8)
 
@@ -82,7 +84,7 @@ if(
     )
 {
 
-char OK67[67];
+if (q == 0) { char OK67[67]; }
 char OK71[71];
 char OK73[73];
 char OK79[79];
@@ -310,6 +312,7 @@ if(n%17)
 if(n%19)
 if(n%23)
 if(n%p) // Added this if statement to reflect sieving mod p
+if(q == 0 || n % q) // Added this if statement to reflect sieving mod q
 {
 long long m;
 int k;
