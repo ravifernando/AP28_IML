@@ -84,7 +84,7 @@ if(
     )
 {
 
-if (q == 0) { char OK67[67]; }
+char OK67[67];
 char OK71[71];
 char OK73[73];
 char OK79[79];
