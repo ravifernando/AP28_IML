@@ -1,6 +1,6 @@
 #include "CONST.H"
 
-void SearchAP26(int K, int SHIFT)
+void SearchAP28(int K, int SHIFT)
 { 
 long long n, n43, n47, n53, n59;
 int i43, i47, i53, i59;

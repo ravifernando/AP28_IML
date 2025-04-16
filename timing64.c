@@ -38,7 +38,7 @@ void ReportSolution(int AP_Length,int difference,long long First_Term){
 
 
 
-#include "AP26.h"
+#include "AP28.h"
 
 
 
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 { 
     mytime = microtime();
 
-    SearchAP26(985151,0);
+    SearchAP28(11897117,1408);
 
     totaltime=microtime()-mytime;
     printf("TIME: %lld microseconds\n",totaltime);
