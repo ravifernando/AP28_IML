@@ -37,8 +37,8 @@ void ReportSolution(int AP_Length,int difference,long long First_Term){
 
 
 
-#include "CONST_kp.H"
-#include "AP28_kp.h"
+#include "CONST_kp_q.H"
+#include "AP28_kp_q.h"
 
 
 
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 {
     mytime = microtime();
 
-    SearchAP28_kp(1, &k29, 0);
+    for (int i = 1; i <= 100; i++) SearchAP28_kp_q(i, &k31_29, 0);
 
     totaltime=microtime()-mytime;
     printf("TIME: %lld microseconds\n",totaltime);

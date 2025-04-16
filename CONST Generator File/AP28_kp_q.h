@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void SearchAP28_kp(int K, struct Constants* kp, int SHIFT)
+void SearchAP28_kp_q(int K, struct Constants* kp, int SHIFT)
 {
 
 long long n, n43, n47, n53, n59, n61; // Added n61 due to there being more inner loops (more additions)
@@ -249,7 +249,7 @@ m89=MOD%89;
 m97=MOD%97;
 // m101=MOD%101; // if needed, uncomment
 
-#include "MAKES_kp.H"
+#include "MAKES_kp_q.H"
 
 // Since we want a tighter sieve, I made all bounds be from 0 to (p-28) for the outer loops.
 for(iPRIME1=0;iPRIME1<(PRIME1-28);++iPRIME1)
@@ -293,7 +293,7 @@ r97=n61%97;
 for(iPRIME8=(PRIME8-28);iPRIME8>0;iPRIME8--)
 {
 
-#include "SITO_kp.H"
+#include "SITO_kp_q.H"
 {
 int b;
 
