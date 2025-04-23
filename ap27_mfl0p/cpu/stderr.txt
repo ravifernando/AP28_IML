@@ -1,0 +1,80 @@
+2025-04-02 17:58:03 (37397): Can't open init data file - running in standalone mode
+AP26 CPU 10-shift search version 23_7_5 by Bryan Little
+Compiled Apr  2 2025 with GCC 13.3.0
+Command line: ./ap26_cpu_linux64_23_7_5 
+2025-04-02 17:58:35 (37399): Can't open init data file - running in standalone mode
+AP26 CPU 10-shift search version 23_7_5 by Bryan Little
+Compiled Apr  2 2025 with GCC 13.3.0
+Command line: ./ap26_cpu_linux64_23_7_5 377382 366387 0 
+Assumed asimd CPU
+2025-04-02 17:58:35 (37399): called boinc_finish(0)
+2025-04-02 18:00:14 (37407): Can't open init data file - running in standalone mode
+AP26 CPU 10-shift search version 23_7_5 by Bryan Little
+Compiled Apr  2 2025 with GCC 13.3.0
+Command line: ./ap26_cpu_linux64_23_7_5 366382 366387 0 
+Assumed asimd CPU
+Workunit complete. Number of AP10+ found 970
+2025-04-03 10:17:49 (37407): called boinc_finish(0)
+2025-04-11 15:03:10 (37452): Can't open init data file - running in standalone mode
+AP26 CPU 10-shift search version 23_7_5 by Bryan Little
+Compiled Apr  2 2025 with GCC 13.3.0
+Command line: ./ap26_cpu_linux64_23_7_5 
+2025-04-11 15:30:05 (37454): Can't open init data file - running in standalone mode
+AP26 CPU 10-shift search version 23_7_5 by Bryan Little
+Compiled Apr  2 2025 with GCC 13.3.0
+Command line: ./ap26_cpu_linux64_23_7_5 985151 0 
+2025-04-11 15:30:19 (37456): Can't open init data file - running in standalone mode
+AP26 CPU 10-shift search version 23_7_5 by Bryan Little
+Compiled Apr  2 2025 with GCC 13.3.0
+Command line: ./ap26_cpu_linux64_23_7_5 985151 985151 0 
+Assumed asimd CPU
+Workunit complete. Number of AP10+ found 22
+2025-04-11 15:49:01 (37456): called boinc_finish(0)
+2025-04-11 16:24:12 (37494): Can't open init data file - running in standalone mode
+AP26 CPU 10-shift search version 23_7_5 by Bryan Little
+Compiled Apr  2 2025 with GCC 13.3.0
+Command line: ./ap26_cpu_linux64_23_7_5 985151 985151 0 
+Assumed asimd CPU
+Resuming from checkpoint. K: 985152
+2025-04-11 16:24:12 (37494): called boinc_finish(0)
+2025-04-11 16:24:40 (37501): Can't open init data file - running in standalone mode
+AP26 CPU 10-shift search version 23_7_5 by Bryan Little
+Compiled Apr  2 2025 with GCC 13.3.0
+Command line: ./ap26_cpu_linux64_23_7_5 985151 985151 0 
+Assumed asimd CPU
+Resuming from checkpoint. K: 985152
+2025-04-11 16:24:40 (37501): called boinc_finish(0)
+2025-04-11 16:25:12 (37503): Can't open init data file - running in standalone mode
+AP26 CPU 10-shift search version 23_7_5 by Bryan Little
+Compiled Apr  2 2025 with GCC 13.3.0
+Command line: ./ap26_cpu_linux64_23_7_5 11897117 11897117 1408 
+Assumed asimd CPU
+2025-04-11 16:25:23 (37506): Can't open init data file - running in standalone mode
+AP26 CPU 10-shift search version 23_7_5 by Bryan Little
+Compiled Apr  2 2025 with GCC 13.3.0
+Command line: ./ap26_cpu_linux64_23_7_5 11897117 11897117 1408 
+Assumed asimd CPU
+Resuming from checkpoint. K: 11897117
+Workunit complete. Number of AP10+ found 18
+2025-04-11 16:30:29 (37506): called boinc_finish(0)
+2025-04-11 16:32:12 (37513): Can't open init data file - running in standalone mode
+AP26 CPU 10-shift search version 23_7_5 by Bryan Little
+Compiled Apr  2 2025 with GCC 13.3.0
+Command line: ./ap26_cpu_linux64_23_7_5 67515487 67515487 1024 
+Assumed asimd CPU
+Workunit complete. Number of AP10+ found 17
+2025-04-11 16:37:31 (37513): called boinc_finish(0)
+2025-04-11 16:39:31 (37520): Can't open init data file - running in standalone mode
+AP26 CPU 10-shift search version 23_7_5 by Bryan Little
+Compiled Apr  2 2025 with GCC 13.3.0
+Command line: ./ap26_cpu_linux64_23_7_5 120481029 120481029 2880 
+Assumed asimd CPU
+Workunit complete. Number of AP10+ found 13
+2025-04-11 16:44:51 (37520): called boinc_finish(0)
+2025-04-11 16:48:08 (37527): Can't open init data file - running in standalone mode
+AP26 CPU 10-shift search version 23_7_5 by Bryan Little
+Compiled Apr  2 2025 with GCC 13.3.0
+Command line: ./ap26_cpu_linux64_23_7_5 985151 985151 0 
+Assumed asimd CPU
+Workunit complete. Number of AP10+ found 21
+2025-04-11 16:53:28 (37527): called boinc_finish(0)
