@@ -160,7 +160,7 @@ uint64x2_t ixOKOK277[277];
     } \
     ixOKOK##_X[j] = vld1q_u64( (uint64_t*)sOKOK ); \
   }
-
+  
 
 void *thr_func_asimd(void *arg) {
     thread_data_t *data = (thread_data_t *)arg;

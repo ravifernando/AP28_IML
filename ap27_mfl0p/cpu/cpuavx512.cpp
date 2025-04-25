@@ -285,8 +285,8 @@ void *thr_func_avx512(void *arg) {
 
 	if(data->id == 0){
 		time(&boinc_last);
-		cc = (double)( data->K_DONE*numn43s );
-		dd = 1.0 / (double)( data->K_COUNT*numn43s );		
+		cc = (double)( data->K_DONE*numn43s*5 + data->iteration*numn43s);
+		dd = 1.0 / (double)( data->K_COUNT*numn43s * 5);		
 	}
 
 	ckerr(pthread_mutex_lock(&lock1));
@@ -309,11 +309,11 @@ void *thr_func_avx512(void *arg) {
 			}
 			
 			n43=n43_h[start];
-			for(i43=(PRIME5-24);i43>0;i43--){
+			for(i43=(PRIME5-26);i43>2;i43--){
 				n47=n43;
-				for(i47=(PRIME6-24);i47>0;i47--){
+				for(i47=(PRIME6-26);i47>2;i47--){
 					n53=n47;
-					for(i53=(PRIME7-24);i53>0;i53--){
+					for(i53=(PRIME7-26);i53>2;i53--){
 						n59=n53;
 						rems[0] = REM(n59,61,6);
 						rems[1] = REM(n59,67,7);
@@ -333,9 +333,9 @@ void *thr_func_avx512(void *arg) {
 						rems[15] = REM(n59,137,8);
 						__m256i rvec = _mm256_load_si256( (__m256i*)rems);
 
-						for(i59=(PRIME8-24);i59>0;i59--){
+						for(i59=(PRIME8-26);i59>2;i59--){
 							
-							if(i59 < 35){
+							if(i59 < PRIME8-26){
 								_mm256_store_si256( (__m256i*)rems, rvec);
 							}								
 
@@ -541,11 +541,11 @@ void Search_avx512(int K, int SHIFT, int K_COUNT, int K_DONE, int threads)
 
 	int count=0;
 
-	for(i31=0;i31<7;++i31)
-	for(i37=0;i37<13;++i37)
-	if(i37-i31<=10&&i31-i37<=4)
-	for(i41=0;i41<17;++i41)
-	if(i41-i31<=14&&i41-i37<=14&&i31-i41<=4&&i37-i41<=10)
+	for(i31=2;i31<5;++i31)
+	for(i37=2;i37<11;++i37)
+	//if(i37-i31<=10&&i31-i37<=4)
+	for(i41=2;i41<15;++i41)
+	//if(i41-i31<=14&&i41-i37<=14&&i31-i41<=4&&i37-i41<=10)
 	for(i3=0;i3<2;++i3)
 	for(i5=0;i5<4;++i5){ 
 		n43_h[count]=(n0+i3*S3+i5*S5+i31*S31+i37*S37+i41*S41)%MOD;  //10840 of these  12673 n53 per
