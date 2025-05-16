@@ -58,8 +58,8 @@ void *thr_func_avx(void *arg) {
 
 	if(data->id == 0){
 		time(&boinc_last);
-		cc = (double)( data->K_DONE*numn43s*5 + data->iteration*numn43s );
-		dd = 1.0 / (double)( data->K_COUNT*numn43s*5 );		
+		cc = (double)( data->K_DONE*numn43s*3 + data->iteration*numn43s );
+		dd = 1.0 / (double)( data->K_COUNT*numn43s*3 );		
 	}
 
 	ckerr(pthread_mutex_lock(&lock1));
@@ -458,7 +458,7 @@ void Search_avx(int K, int startSHIFT, int K_COUNT, int K_DONE, int threads)
 	int iteration = 0;
 
 	// 10 shift
-	for(SHIFT=startSHIFT; SHIFT<maxshift; SHIFT+=128){
+	for(SHIFT=startSHIFT; SHIFT<maxshift; SHIFT+=256){
 
 		MAKE_OKOK(61);
 		MAKE_OKOK(67);

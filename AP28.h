@@ -1,4 +1,5 @@
 #include "CONST.H"
+#include <stdint.h>
 
 void SearchAP28(int K, int SHIFT)
 { 
@@ -217,41 +218,7 @@ if(n43>=MOD)n43-=MOD;
 }
 }
 
-uint64_t add_binary(uint64_t a, uint64_t b, uint64_t m) {
-    if (m >= (1ULL << 63)) {
-        // Fallback to simple addition if m is too large
-        return (a + b) % m;
-    }
 
-    // Find the highest set bit in b
-    int highest_bit = 63;
-    while (highest_bit >= 0 && !(b & (1ULL << highest_bit))) {
-        highest_bit--;
-    }
-
-    if (highest_bit < 0) {
-        return a % m;  // b is 0
-    }
-
-    uint64_t result = 0;
-    uint64_t temp = a;
-
-    // Precompute 2^i * a mod m for all bits
-    uint64_t powers[64];
-    powers[0] = a % m;
-    for (int i = 1; i <= highest_bit; i++) {
-        powers[i] = (powers[i-1] * 2) % m;
-    }
-
-    // Add up the terms where b has a 1 bit
-    for (int i = 0; i <= highest_bit; i++) {
-        if (b & (1ULL << i)) {
-            result = (result + powers[i]) % m;
-        }
-    }
-
-    return result;
-}
 
 
 

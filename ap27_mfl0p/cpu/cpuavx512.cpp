@@ -285,8 +285,8 @@ void *thr_func_avx512(void *arg) {
 
 	if(data->id == 0){
 		time(&boinc_last);
-		cc = (double)( data->K_DONE*numn43s*5 + data->iteration*numn43s);
-		dd = 1.0 / (double)( data->K_COUNT*numn43s * 5);		
+		cc = (double)( data->K_DONE*numn43s);
+		dd = 1.0 / (double)( data->K_COUNT*numn43s);		
 	}
 
 	ckerr(pthread_mutex_lock(&lock1));
