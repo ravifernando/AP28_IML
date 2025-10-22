@@ -109,13 +109,15 @@ long long mult(const long long a, const long long b) {
   return c;
 }
 
-void constWriter(const std::string& filename,
+void constWriter(
+  const std::string& filename,
   std::vector<long long> commonDifferenceDivisors,
   std::vector<long long> primesForCandidates,
   const long long specialPrime,
   const long long multiply,
   const long long bitmaskPrime,
-  const long long sievePrime) {
+  const long long sievePrime
+  ) {
 
   // Checks if specialPrime and multiply parameters make sense
   if (specialPrime > 0 && multiply == 0) {
@@ -147,13 +149,29 @@ void constWriter(const std::string& filename,
 
   // Opens the file for writing
   std::ofstream writeToFile;
-  writeToFile.open(filename);
+  writeToFile.open(filename, std::ios_base::app);
+
+  // Write an array to file
+  writeToFile << "{";
+  
+  // typeSearch = commonDifferenceDivisors \ primesForCandidates; this set substraction determines the type of search
+  std::vector<long long> typeSearch;
+  std::set_difference(
+      commonDifferenceDivisors.begin(), commonDifferenceDivisors.end(),
+      primesForCandidates.begin(), primesForCandidates.end(),
+      std::back_inserter(typeSearch)
+  );
+
+  // Writes type of search to file (the primes beyond 23 that k is additionally divisible by)
+  for (long long i = 0; i < typeSearch.size(); i++) if (typeSearch.at(i) > 23) { writeToFile << typeSearch.at(i) << ",\n"; }
+
+  // Writes specialPrime to file
+  writeToFile << specialPrime << ",\n";
 
   // Calculates the common difference and writes to file
-  // The name of this variable is PRIM + the largest prime factor of MOD (last element of the sorted commonDifferenceDivisors)
   long long commonDifference = 1;
   for (const long long p : commonDifferenceDivisors) commonDifference = mult(commonDifference, p);
-  writeToFile << "#define PRIM" << commonDifferenceDivisors.at(commonDifferenceDivisors.size() - 1) << " " << commonDifference << "LL\n";
+  writeToFile << commonDifference << ",\n";
 
   // PRIMEConstants = primesForCandidates \ commonDifferenceDivisors; this set subtraction determines the values of the PRIME constants.
   std::vector<long long> PRIMEConstants;
@@ -164,15 +182,15 @@ void constWriter(const std::string& filename,
   );
 
   // Writes the PRIME constants to file
-  for (long long i = 0; i < PRIMEConstants.size(); i++) writeToFile << "#define PRIME" << (i + 1) << " " << PRIMEConstants.at(i) << "\n";
+  for (long long i = 0; i < PRIMEConstants.size(); i++) writeToFile << PRIMEConstants.at(i) << ",\n";
 
   // Calculates MOD and writes to file
-  long long MOD = 1;
-  for (const long long p : primesForCandidates) MOD = mult(MOD, p);
-  writeToFile << "#define MOD" << " " << MOD << "LL\n";
+  long long mod = 1;
+  for (const long long p : primesForCandidates) mod = mult(mod, p);
+  writeToFile << mod << ",\n";
 
   // Calculates N0, N30 and writes to file
-  if (specialPrime == 0) writeToFile << "#define N0 " << commonDifference << "LL\n";
+  if (specialPrime == 0) writeToFile << commonDifference << ",\n";
   else {
     std::vector<long long> congruences;
     for (long long i = 0; i < primesForCandidates.size(); i++) congruences.push_back(commonDifference % primesForCandidates.at(i));
@@ -182,15 +200,15 @@ void constWriter(const std::string& filename,
       std::cout << "ERROR: Invalid special prime." << std::endl;
       abort();
     }
-    long long N0 = findMinX(primesForCandidates, congruences);
-    writeToFile << "#define N0 " << N0 << "LL\n";
+    long long n0 = findMinX(primesForCandidates, congruences);
+    writeToFile << n0 << ",\n";
   }
   std::vector<long long> congruences(primesForCandidates.size(), 0);
   congruences.at(0) = 1;
   congruences.at(1) = 1;
   congruences.at(2) = 1;
   long long CRT = findMinX(primesForCandidates, congruences);
-  writeToFile << "#define N30 " << CRT << "LL\n";
+  writeToFile << CRT << ",\n";
   congruences.at(0) = 0;
   congruences.at(1) = 0;
   congruences.at(2) = 0;
@@ -207,7 +225,7 @@ void constWriter(const std::string& filename,
     auto iter = std::find(primesForCandidates.begin(), primesForCandidates.end(), SPprime);
     congruences.at(iter - primesForCandidates.begin()) = 1;
     CRT = findMinX(primesForCandidates, congruences);
-    writeToFile << "#define S" << SPprime << " " << CRT << "LL\n";
+    writeToFile << CRT << ",\n";
     congruences.at(iter - primesForCandidates.begin()) = 0;
   }
 
@@ -218,29 +236,50 @@ void constWriter(const std::string& filename,
     auto iter = std::find(primesForCandidates.begin(), primesForCandidates.end(), PRIMEConstant);
     congruences.at(iter - primesForCandidates.begin()) = commonDifference % PRIMEConstant;
     CRT = findMinX(primesForCandidates, congruences);
-    writeToFile << "#define PRES" << index << " " << CRT << "LL\n";
+    if (index != 9) writeToFile << CRT << ",\n";
+    else writeToFile << CRT << "},\n\n";
     congruences.at(iter - primesForCandidates.begin()) = 0;
     index++;
   }
 
-  // Writes OK and OKOK arrays to file
-  for (long long p = primesForCandidates.at(primesForCandidates.size() - 1) + 1; p < primes.size(); p++) {
-    if (primes.at(p)) {
-      writeToFile << "char OK" << p << "[" << p << "];\n";
-    }
-  }
-  for (long long p = primesForCandidates.at(primesForCandidates.size() - 1) + 1; p <= bitmaskPrime; p++) {
-    if (primes.at(p)) {
-      writeToFile << "long long OKOK" << p << "[" << p << "];\n";
-    }
-  }
+  // // Writes OK and OKOK arrays to file
+  // for (long long p = primesForCandidates.at(primesForCandidates.size() - 1) + 1; p < primes.size(); p++) {
+  //   if (primes.at(p)) {
+  //     writeToFile << "char OK" << p << "[" << p << "];\n";
+  //   }
+  // }
+  // for (long long p = primesForCandidates.at(primesForCandidates.size() - 1) + 1; p <= bitmaskPrime; p++) {
+  //   if (primes.at(p)) {
+  //     writeToFile << "long long OKOK" << p << "[" << p << "];\n";
+  //   }
+  // }
+
   // Closes file after all writing needed is finished
   writeToFile.close();
 }
 
 int main(int argc, char const *argv[]) {
-  const std::vector<long long> commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
-  const std::vector<long long> primesForCandidates = { 2, 3, 5, 31, 37, 41, 43, 47, 53, 59, 61 };
-  constWriter("WRITE_CONST.H", commonDifferenceDivisors, primesForCandidates, 31, 3, 331, 541);
+  std::vector<long long> commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };
+  std::vector<long long> primesForCandidates = { 2, 3, 5, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67 };
+  std::vector<long long> ExtraPrimes = { 29, 31, 37, 41, 43, 47, 53, 59, 61 };
+  for (int i = 0; i < ExtraPrimes.size(); i++) {
+    for (int j = i + 1; j < ExtraPrimes.size(); j++) {
+      commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };
+      commonDifferenceDivisors.push_back(ExtraPrimes.at(i));
+      commonDifferenceDivisors.push_back(ExtraPrimes.at(j));
+      primesForCandidates = { 2, 3, 5, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67 };
+      primesForCandidates.erase(std::remove(primesForCandidates.begin(), primesForCandidates.end(), ExtraPrimes.at(i)), primesForCandidates.end());
+      primesForCandidates.erase(std::remove(primesForCandidates.begin(), primesForCandidates.end(), ExtraPrimes.at(j)), primesForCandidates.end());
+      // for (int k = 0; k < commonDifferenceDivisors.size(); k++) {
+      //   std::cout << commonDifferenceDivisors.at(k) << ", ";
+      // }
+      // std::cout << std::endl;
+      // for (int t = 0; t < primesForCandidates.size(); t++) {
+      //   std::cout << primesForCandidates.at(t) << ", ";
+      // }
+      // std::cout << std::endl;
+      constWriter("CONST_kp_q.H", commonDifferenceDivisors, primesForCandidates, 0, 0, 331, 541);
+    }
+  }
   return 0;
 }
