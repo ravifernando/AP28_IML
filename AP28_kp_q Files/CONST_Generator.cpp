@@ -127,7 +127,7 @@ void constWriter(
     std::cout << "ERROR: specialPrime is negative. This input should be set to 0 if there is no special prime." << std::endl;
     abort();
   } else if (specialPrime == 0 && multiply != 0) {
-    std::cout << "ERROR: specialPrime is 0, but multiply is nonzero. The multiply input should be set to 0" << std::endl;
+    std::cout << "ERROR: specialPrime is 0, but multiply is nonzero. The multiply input should be set to 0." << std::endl;
   }
 
   // Checks if bitmaskPrime and sievePrime parameters make sense
@@ -163,7 +163,21 @@ void constWriter(
   );
 
   // Writes type of search to file (the primes beyond 23 that k is additionally divisible by)
-  for (long long i = 0; i < typeSearch.size(); i++) if (typeSearch.at(i) > 23) { writeToFile << typeSearch.at(i) << ",\n"; }
+  long long count = 0;
+  for (long long i = 0; i < typeSearch.size(); i++) {
+    if (typeSearch.at(i) > 23) {
+      writeToFile << typeSearch.at(i) << ",\n";
+      count++;
+    }
+  }
+
+  // Writes 0 to file if count == 1 (meaning the search is kp instead of kp_q) 
+  if (count > 2) {
+    std::cout << "ERROR: count > 2, which means that the common difference is divisible by more than 2 primes greater than 23. kp_q searches are only supported" << std::endl;
+    abort();
+  } else if (count == 1) {
+    writeToFile << 0 << ",\n";
+  }
 
   // Writes specialPrime to file
   writeToFile << specialPrime << ",\n";
@@ -230,17 +244,18 @@ void constWriter(
   }
 
   // Calculates PRESP where P are primes in the PRIMEConstants vector
-  long long index = 2;
-  for (long long PRIMEConstant : PRIMEConstants) {
-    if (PRIMEConstant == specialPrime) continue;
-    auto iter = std::find(primesForCandidates.begin(), primesForCandidates.end(), PRIMEConstant);
-    congruences.at(iter - primesForCandidates.begin()) = commonDifference % PRIMEConstant;
+  for (long long i = 0; i < PRIMEConstants.size(); i++) {
+    if (PRIMEConstants.at(i) == specialPrime) continue;
+    auto iter = std::find(primesForCandidates.begin(), primesForCandidates.end(), PRIMEConstants.at(i));
+    congruences.at(iter - primesForCandidates.begin()) = commonDifference % PRIMEConstants.at(i);
     CRT = findMinX(primesForCandidates, congruences);
-    if (index != 9) writeToFile << CRT << ",\n";
-    else writeToFile << CRT << "},\n\n";
+    if (i < PRIMEConstants.size() - 1) writeToFile << CRT << ",\n";
+    else writeToFile << CRT;
     congruences.at(iter - primesForCandidates.begin()) = 0;
-    index++;
   }
+
+  // Writes },\n\n to end array construction
+  writeToFile << "},\n\n";
 
   // // Writes OK and OKOK arrays to file
   // for (long long p = primesForCandidates.at(primesForCandidates.size() - 1) + 1; p < primes.size(); p++) {
@@ -259,27 +274,28 @@ void constWriter(
 }
 
 int main(int argc, char const *argv[]) {
-  std::vector<long long> commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };
-  std::vector<long long> primesForCandidates = { 2, 3, 5, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67 };
+  std::vector<long long> commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
+  std::vector<long long> primesForCandidates = { 2, 3, 5, 31, 37, 41, 43, 47, 53, 59, 61 };
   std::vector<long long> ExtraPrimes = { 29, 31, 37, 41, 43, 47, 53, 59, 61 };
-  for (int i = 0; i < ExtraPrimes.size(); i++) {
-    for (int j = i + 1; j < ExtraPrimes.size(); j++) {
-      commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };
-      commonDifferenceDivisors.push_back(ExtraPrimes.at(i));
-      commonDifferenceDivisors.push_back(ExtraPrimes.at(j));
-      primesForCandidates = { 2, 3, 5, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67 };
-      primesForCandidates.erase(std::remove(primesForCandidates.begin(), primesForCandidates.end(), ExtraPrimes.at(i)), primesForCandidates.end());
-      primesForCandidates.erase(std::remove(primesForCandidates.begin(), primesForCandidates.end(), ExtraPrimes.at(j)), primesForCandidates.end());
-      // for (int k = 0; k < commonDifferenceDivisors.size(); k++) {
-      //   std::cout << commonDifferenceDivisors.at(k) << ", ";
-      // }
-      // std::cout << std::endl;
-      // for (int t = 0; t < primesForCandidates.size(); t++) {
-      //   std::cout << primesForCandidates.at(t) << ", ";
-      // }
-      // std::cout << std::endl;
-      constWriter("CONST_kp_q.H", commonDifferenceDivisors, primesForCandidates, 0, 0, 331, 541);
-    }
-  }
+  // for (int i = 0; i < ExtraPrimes.size(); i++) {
+  //   for (int j = i + 1; j < ExtraPrimes.size(); j++) {
+  //     commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };
+  //     commonDifferenceDivisors.push_back(ExtraPrimes.at(i));
+  //     commonDifferenceDivisors.push_back(ExtraPrimes.at(j));
+  //     primesForCandidates = { 2, 3, 5, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67 };
+  //     primesForCandidates.erase(std::remove(primesForCandidates.begin(), primesForCandidates.end(), ExtraPrimes.at(i)), primesForCandidates.end());
+  //     primesForCandidates.erase(std::remove(primesForCandidates.begin(), primesForCandidates.end(), ExtraPrimes.at(j)), primesForCandidates.end());
+  //     // for (int k = 0; k < commonDifferenceDivisors.size(); k++) {
+  //     //   std::cout << commonDifferenceDivisors.at(k) << ", ";
+  //     // }
+  //     // std::cout << std::endl;
+  //     // for (int t = 0; t < primesForCandidates.size(); t++) {
+  //     //   std::cout << primesForCandidates.at(t) << ", ";
+  //     // }
+  //     // std::cout << std::endl;
+  //     constWriter("TEST.H", commonDifferenceDivisors, primesForCandidates, 0, 0, 331, 541);
+  //   }
+  // }
+  constWriter("TEST.H", commonDifferenceDivisors, primesForCandidates, 31, 3, 331, 541);
   return 0;
 }
