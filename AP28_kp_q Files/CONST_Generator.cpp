@@ -195,8 +195,11 @@ void constWriter(
       std::back_inserter(PRIMEConstants)
   );
 
-  // Writes the PRIME constants to file
-  for (long long i = 0; i < PRIMEConstants.size(); i++) writeToFile << PRIMEConstants.at(i) << ",\n";
+  // Writes the PRIME constants to file (specialPrime is skipped due to the fixed good residue)
+  for (long long i = 0; i < PRIMEConstants.size(); i++) {
+    if (PRIMEConstants.at(i) == specialPrime) continue;
+    writeToFile << PRIMEConstants.at(i) << ",\n";
+  }
 
   // Calculates MOD and writes to file
   long long mod = 1;
@@ -274,8 +277,8 @@ void constWriter(
 }
 
 int main(int argc, char const *argv[]) {
-  std::vector<long long> commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
-  std::vector<long long> primesForCandidates = { 2, 3, 5, 31, 37, 41, 43, 47, 53, 59, 61 };
+  std::vector<long long> commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 37 };
+  std::vector<long long> primesForCandidates = { 2, 3, 5, 31, 41, 43, 47, 53, 59, 61, 67 };
   std::vector<long long> ExtraPrimes = { 29, 31, 37, 41, 43, 47, 53, 59, 61 };
   // for (int i = 0; i < ExtraPrimes.size(); i++) {
   //   for (int j = i + 1; j < ExtraPrimes.size(); j++) {
@@ -296,6 +299,6 @@ int main(int argc, char const *argv[]) {
   //     constWriter("TEST.H", commonDifferenceDivisors, primesForCandidates, 0, 0, 331, 541);
   //   }
   // }
-  constWriter("TEST.H", commonDifferenceDivisors, primesForCandidates, 31, 3, 331, 541);
+  constWriter("CONST_kp_q.H", commonDifferenceDivisors, primesForCandidates, 0, 0, 331, 541);
   return 0;
 }
