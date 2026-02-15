@@ -10,24 +10,19 @@ int i3, i5, iPRIME1, iPRIME2, iPRIME3;
 int constantsIndex = 0;
 for (int i = 0; i < sizeof(constantsList) / sizeof(constantsList[0][0]); i++) {
     if (constantsList[i][0] == extraPrimes) {
+        if (constantsList[i][0] == 29 && constantsList[i][2] == 0) continue;
         constantsIndex = i;
         break;
     } else if (constantsList[i][0] * constantsList[i][1] == extraPrimes) {
+        if (constantsList[i][0] == 29 && constantsList[i][2] == 0) continue;
         constantsIndex = i;
         break;
     }
 }
+
 int p = constantsList[constantsIndex][0];
 int q = constantsList[constantsIndex][1];
 int special = constantsList[constantsIndex][2];
-int PRIME1 = constantsList[constantsIndex][4]; // skipping index 3 is intentional
-int PRIME2 = constantsList[constantsIndex][5];
-int PRIME3 = constantsList[constantsIndex][6];
-int PRIME4 = constantsList[constantsIndex][7];
-int PRIME5 = constantsList[constantsIndex][8];
-int PRIME6 = constantsList[constantsIndex][9];
-int PRIME7 = constantsList[constantsIndex][10];
-int PRIME8 = constantsList[constantsIndex][11];
 
 int i, j, jj;
 
@@ -36,6 +31,22 @@ long long STEP5;
 long long STEP4;
 long long n0;
 long long sito;
+
+long long SPRIME1, SPRIME2, SPRIME3, SPRIME4, SPRIME5, SPRIME6, SPRIME7, SPRIME8; // Added S61 (now SPRIME8)
+
+int s67, s71, s73, s79, s83, s89, s97, s101; // Removed s61; added s101 if needed
+int m67, m71, m73, m79, m83, m89, m97, m101; // Removed m61; added m101 if needed
+
+if (!special) {
+
+int PRIME1 = constantsList[constantsIndex][4]; // skipping index 3 is intentional
+int PRIME2 = constantsList[constantsIndex][5];
+int PRIME3 = constantsList[constantsIndex][6];
+int PRIME4 = constantsList[constantsIndex][7];
+int PRIME5 = constantsList[constantsIndex][8];
+int PRIME6 = constantsList[constantsIndex][9];
+int PRIME7 = constantsList[constantsIndex][10];
+int PRIME8 = constantsList[constantsIndex][11];
 
 long long COMMONDIFF = constantsList[constantsIndex][3]; // COMMONDIFF is in index 3
 long long MOD = constantsList[constantsIndex][12];
@@ -52,38 +63,32 @@ long long PRES7 = constantsList[constantsIndex][22];
 long long PRES8 = constantsList[constantsIndex][23];
 long long PRES9 = constantsList[constantsIndex][24];
 
-printf("p: %d\n", p);
-printf("q: %d\n", q);
-printf("special: %d\n", special);
-printf("COMMONDIFF: %lld\n", COMMONDIFF);
-printf("PRIME1: %d\n", PRIME1);
-printf("PRIME2: %d\n", PRIME2);
-printf("PRIME3: %d\n", PRIME3);
-printf("PRIME4: %d\n", PRIME4);
-printf("PRIME5: %d\n", PRIME5);
-printf("PRIME6: %d\n", PRIME6);
-printf("PRIME7: %d\n", PRIME7);
-printf("PRIME8: %d\n", PRIME8);
-printf("MOD: %lld\n", MOD);
-printf("N0: %lld\n", N0);
-printf("N30: %lld\n", N30);
-printf("S3: %lld\n", S3);
-printf("S5: %lld\n", S5);
-printf("PRES2: %lld\n", PRES2);
-printf("PRES3: %lld\n", PRES3);
-printf("PRES4: %lld\n", PRES4);
-printf("PRES5: %lld\n", PRES5);
-printf("PRES6: %lld\n", PRES6);
-printf("PRES7: %lld\n", PRES7);
-printf("PRES8: %lld\n", PRES8);
-printf("PRES9: %lld\n", PRES9);
+// printf("p: %d\n", p);
+// printf("q: %d\n", q);
+// printf("special: %d\n", special);
+// printf("COMMONDIFF: %lld\n", COMMONDIFF);
+// printf("PRIME1: %d\n", PRIME1);
+// printf("PRIME2: %d\n", PRIME2);
+// printf("PRIME3: %d\n", PRIME3);
+// printf("PRIME4: %d\n", PRIME4);
+// printf("PRIME5: %d\n", PRIME5);
+// printf("PRIME6: %d\n", PRIME6);
+// printf("PRIME7: %d\n", PRIME7);
+// printf("PRIME8: %d\n", PRIME8);
+// printf("MOD: %lld\n", MOD);
+// printf("N0: %lld\n", N0);
+// printf("N30: %lld\n", N30);
+// printf("S3: %lld\n", S3);
+// printf("S5: %lld\n", S5);
+// printf("PRES2: %lld\n", PRES2);
+// printf("PRES3: %lld\n", PRES3);
+// printf("PRES4: %lld\n", PRES4);
+// printf("PRES5: %lld\n", PRES5);
+// printf("PRES6: %lld\n", PRES6);
+// printf("PRES7: %lld\n", PRES7);
+// printf("PRES8: %lld\n", PRES8);
+// printf("PRES9: %lld\n", PRES9);
 
-long long SPRIME1, SPRIME2, SPRIME3, SPRIME4, SPRIME5, SPRIME6, SPRIME7, SPRIME8; // Added S61 (now SPRIME8)
-
-int s67, s71, s73, s79, s83, s89, s97, s101; // Removed s61; added s101 if needed
-int m67, m71, m73, m79, m83, m89, m97, m101; // Removed m61; added m101 if needed
-
-if (!special) {
 // skip k's that are divisible by PRIME1, ..., or PRIME8 for the sake of simplicity
 if(
         K%PRIME1&&
@@ -418,6 +423,53 @@ if(n43>=MOD)n43-=MOD;
 }
 }
 else {
+
+int PRIME1 = constantsList[constantsIndex][4]; // skipping index 3 is intentional
+int PRIME2 = constantsList[constantsIndex][5];
+int PRIME3 = constantsList[constantsIndex][6];
+int PRIME4 = constantsList[constantsIndex][7];
+int PRIME5 = constantsList[constantsIndex][8];
+int PRIME6 = constantsList[constantsIndex][9];
+int PRIME7 = constantsList[constantsIndex][10];
+
+long long COMMONDIFF = constantsList[constantsIndex][3]; // COMMONDIFF is in index 3
+long long MOD = constantsList[constantsIndex][11];
+long long N0 = constantsList[constantsIndex][12];
+long long N30 = constantsList[constantsIndex][13];
+long long S3 = constantsList[constantsIndex][14];
+long long S5 = constantsList[constantsIndex][15];
+long long PRES2 = constantsList[constantsIndex][16];
+long long PRES3 = constantsList[constantsIndex][17];
+long long PRES4 = constantsList[constantsIndex][18];
+long long PRES5 = constantsList[constantsIndex][19];
+long long PRES6 = constantsList[constantsIndex][20];
+long long PRES7 = constantsList[constantsIndex][21];
+long long PRES8 = constantsList[constantsIndex][22];
+
+// printf("p: %d\n", p);
+// printf("q: %d\n", q);
+// printf("special: %d\n", special);
+// printf("COMMONDIFF: %lld\n", COMMONDIFF);
+// printf("PRIME1: %d\n", PRIME1);
+// printf("PRIME2: %d\n", PRIME2);
+// printf("PRIME3: %d\n", PRIME3);
+// printf("PRIME4: %d\n", PRIME4);
+// printf("PRIME5: %d\n", PRIME5);
+// printf("PRIME6: %d\n", PRIME6);
+// printf("PRIME7: %d\n", PRIME7);
+// printf("MOD: %lld\n", MOD);
+// printf("N0: %lld\n", N0);
+// printf("N30: %lld\n", N30);
+// printf("S3: %lld\n", S3);
+// printf("S5: %lld\n", S5);
+// printf("PRES2: %lld\n", PRES2);
+// printf("PRES3: %lld\n", PRES3);
+// printf("PRES4: %lld\n", PRES4);
+// printf("PRES5: %lld\n", PRES5);
+// printf("PRES6: %lld\n", PRES6);
+// printf("PRES7: %lld\n", PRES7);
+// printf("PRES8: %lld\n", PRES8);
+
 if(
 		K%PRIME1&& // No need to change, because I am changing the values in CONST_k29.H
 		K%PRIME2&&
@@ -594,7 +646,7 @@ m89=MOD%89;
 m97=MOD%97;
 // m101=MOD%101; // If needed, uncomment.
 
-#include "MAKES_kp_q.H"
+#include "MAKES_k29.H"
 
 
 for(iPRIME1=0;iPRIME1<(PRIME1-26);++iPRIME1)
