@@ -7,7 +7,7 @@
 // A C++ program to demonstrate
 // working of Chinese remainder
 // Theorem
-#include <bits/stdc++.h>
+#include <set>
 
 // Returns modulo inverse of a
 // with respect to m using
@@ -277,28 +277,8 @@ void constWriter(
 }
 
 int main(int argc, char const *argv[]) {
-  std::vector<long long> commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 37 };
-  std::vector<long long> primesForCandidates = { 2, 3, 5, 31, 41, 43, 47, 53, 59, 61, 67 };
-  std::vector<long long> ExtraPrimes = { 29, 31, 37, 41, 43, 47, 53, 59, 61 };
-  // for (int i = 0; i < ExtraPrimes.size(); i++) {
-  //   for (int j = i + 1; j < ExtraPrimes.size(); j++) {
-  //     commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };
-  //     commonDifferenceDivisors.push_back(ExtraPrimes.at(i));
-  //     commonDifferenceDivisors.push_back(ExtraPrimes.at(j));
-  //     primesForCandidates = { 2, 3, 5, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67 };
-  //     primesForCandidates.erase(std::remove(primesForCandidates.begin(), primesForCandidates.end(), ExtraPrimes.at(i)), primesForCandidates.end());
-  //     primesForCandidates.erase(std::remove(primesForCandidates.begin(), primesForCandidates.end(), ExtraPrimes.at(j)), primesForCandidates.end());
-  //     // for (int k = 0; k < commonDifferenceDivisors.size(); k++) {
-  //     //   std::cout << commonDifferenceDivisors.at(k) << ", ";
-  //     // }
-  //     // std::cout << std::endl;
-  //     // for (int t = 0; t < primesForCandidates.size(); t++) {
-  //     //   std::cout << primesForCandidates.at(t) << ", ";
-  //     // }
-  //     // std::cout << std::endl;
-  //     constWriter("TEST.H", commonDifferenceDivisors, primesForCandidates, 0, 0, 331, 541);
-  //   }
-  // }
-  constWriter("CONST_kp_q.H", commonDifferenceDivisors, primesForCandidates, 0, 0, 331, 541);
+  std::vector<long long> commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31 };
+  std::vector<long long> primesForCandidates = { 2, 3, 5, 37, 41, 43, 47, 53, 59, 61, 67 };
+  constWriter("CONST_k29_31_special37.H", commonDifferenceDivisors, primesForCandidates, 37, 3, 331, 541);
   return 0;
 }
