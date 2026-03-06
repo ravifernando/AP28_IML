@@ -20,8 +20,9 @@ Loop 64 times, 1 for each bit in a uint64_t variable, and check if k'th bit is e
 
 Finally, return result
 
-*/
-uint64_t abmodm(uint64_t a, uint64_t b, uint64_t m) {
+This is the overflow-unsafe version, and we abandon it for now.
+
+uint64_t abmodm(uint64_t a, uint64_t b, uint64_t m) { // Russian Peasant Multiplication
     
 
     uint64_t max_bound = 1ULL << 63;
@@ -39,12 +40,46 @@ uint64_t abmodm(uint64_t a, uint64_t b, uint64_t m) {
 
         if (cur_bit & 1) {  //if the current bit is 1, then it is part of the binary expansian
 
-            uint64_t temp_result = pow(2, k) * a;
+            // uint64_t temp_result = pow(2, k) * a;
+            uint64_t temp_result = (1ULL << k) * a;
             temp_result %= m;
 
             result = (result + temp_result) % m;
         }
     }
 
+    return result;
+}
+*/
+
+// This is the overflow-safe version. 
+
+uint64_t abmodm_overflowSafe(uint64_t a, uint64_t b, uint64_t m) {
+    if (m == 0) return 0;
+    
+    // Perform bitwise calculation on b, target is a
+    uint64_t result = 0;
+    a %= m;
+    
+    while (b > 0) {
+        if (b & 1) { // If the current bit is 1, then it is part of the binary expansion
+            // Safe addition: (result + a) % m without overflow
+            if (result >= m - a) {  // Equivalent to (result + a) >= m
+                result -= (m - a);  // Equivalent to (result + a) - m
+            } else {
+                result += a;
+            }
+        }
+        
+        // Double a for next bit (safe doubling without overflow)
+        if (a >= m - a) {
+            a -= (m - a);  // Equivalent to (2 * a) - m
+        } else {
+            a <<= 1;
+        }
+        
+        b >>= 1;  // Move to next bit
+    }
+    
     return result;
 }
