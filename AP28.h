@@ -1,4 +1,5 @@
 #include "CONST.H"
+#include "abmod.h"
 #include <stdint.h>
 
 void SearchAP28(int K, int SHIFT)
@@ -38,17 +39,14 @@ if(
 STEP=K*PRIM23;
 STEP4=STEP*4;
 STEP5=STEP*5;
-n0=(N0*(K%17835)+((N0*17835)%MOD)*(K/17835)+N30)%MOD; // = N0 * K + N30 mod MOD
-// congruent to 1 mod 2*3*5; 3*D mod 29; D mod 31*...*59 (see definition on page 3)
-// these calculations are broken up to avoid long long overflow
-// (17835 * MOD ~ 2^62)
-S31=(PRES2*(K%17835)+((PRES2*17835)%MOD)*(K/17835))%MOD; // = PRES2 * K mod MOD
-S37=(PRES3*(K%17835)+((PRES3*17835)%MOD)*(K/17835))%MOD; // etc.
-S41=(PRES4*(K%17835)+((PRES4*17835)%MOD)*(K/17835))%MOD;
-S43=(PRES5*(K%17835)+((PRES5*17835)%MOD)*(K/17835))%MOD;
-S47=(PRES6*(K%17835)+((PRES6*17835)%MOD)*(K/17835))%MOD;
-S53=(PRES7*(K%17835)+((PRES7*17835)%MOD)*(K/17835))%MOD;
-S59=(PRES8*(K%17835)+((PRES8*17835)%MOD)*(K/17835))%MOD;
+n0=(abmodm(N0, K, MOD)+N30)%MOD; // = N0 * K + N30 mod MOD (overflow-safe)
+S31=abmodm(PRES2, K, MOD); // = PRES2 * K mod MOD (overflow-safe)
+S37=abmodm(PRES3, K, MOD);
+S41=abmodm(PRES4, K, MOD);
+S43=abmodm(PRES5, K, MOD);
+S47=abmodm(PRES6, K, MOD);
+S53=abmodm(PRES7, K, MOD);
+S59=abmodm(PRES8, K, MOD);
                         
 s61=S59%61;
 s67=S59%67;
