@@ -238,16 +238,15 @@ STEP=K*COMMONDIFF; // Changed to COMMONDIFF, since AP28_kp works with various co
 STEP4=STEP*4; // The program starts at sieving n + 4 * STEP and then sieves n + 3 * STEP, n + 2 * STEP, n + STEP, n, n - STEP, ...; I made no edits as this seems to be preferential.
 STEP5=STEP*5; // The program starts at sieving n + 5 * STEP and then sieves n + 6 * STEP, n + 7 * STEP, n + 8 * STEP, ...; I made no edits as this seems to be preferential.
 // Since 17835 * MOD ~ 2^62 in the original code, I am maintaining this equation; it seems to prevent integer overflow.
-long long num = 4611686018427387904 / MOD; // Calculating the "magic number" (the big number is 2^62)
-n0=(N0*(K%num)+((N0*num)%MOD)*(K/num)+N30)%MOD;
-SPRIME1=(PRES2*(K%num)+((PRES2*num)%MOD)*(K/num))%MOD;
-SPRIME2=(PRES3*(K%num)+((PRES3*num)%MOD)*(K/num))%MOD;
-SPRIME3=(PRES4*(K%num)+((PRES4*num)%MOD)*(K/num))%MOD;
-SPRIME4=(PRES5*(K%num)+((PRES5*num)%MOD)*(K/num))%MOD;
-SPRIME5=(PRES6*(K%num)+((PRES6*num)%MOD)*(K/num))%MOD;
-SPRIME6=(PRES7*(K%num)+((PRES7*num)%MOD)*(K/num))%MOD;
-SPRIME7=(PRES8*(K%num)+((PRES8*num)%MOD)*(K/num))%MOD;
-SPRIME8=(PRES9*(K%num)+((PRES9*num)%MOD)*(K/num))%MOD; // Calculate S61 (now SPRIME8)
+n0=(abmodm(N0, K, MOD)+N30)%MOD;
+SPRIME1=abmodm(PRES2, K, MOD);
+SPRIME2=abmodm(PRES3, K, MOD);
+SPRIME3=abmodm(PRES4, K, MOD);
+SPRIME4=abmodm(PRES5, K, MOD);
+SPRIME5=abmodm(PRES6, K, MOD);
+SPRIME6=abmodm(PRES7, K, MOD);
+SPRIME7=abmodm(PRES8, K, MOD);
+SPRIME8=abmodm(PRES9, K, MOD);
 
 s67=SPRIME8%67; // Removed s61=S61%61;
 s71=SPRIME8%71;
@@ -618,15 +617,14 @@ STEP=K*COMMONDIFF; // Changed to PRIM29, since we are now working with 29#
 STEP4=STEP*4; // The program starts at sieving n + 4 * STEP and then sieves n + 3 * STEP, n + 2 * STEP, n + STEP, n, n - STEP, ...; I made no edits as this seems to be preferential.
 STEP5=STEP*5; // The program starts at sieving n + 5 * STEP and then sieves n + 6 * STEP, n + 7 * STEP, n + 8 * STEP, ...; I made no edits as this seems to be preferential.
 // Since 17835 * MOD ~ 2^62 in the original code, I am maintaining this equation; it seems to prevent integer overflow.
-long long num = 4611686018427387904 / MOD; // Calculating the "magic number" (the big number is 2^62)
-n0=(N0*(K%num)+((N0*num)%MOD)*(K/num)+N30)%MOD;
-SPRIME1=(PRES2*(K%num)+((PRES2*num)%MOD)*(K/num))%MOD;
-SPRIME2=(PRES3*(K%num)+((PRES3*num)%MOD)*(K/num))%MOD;
-SPRIME3=(PRES4*(K%num)+((PRES4*num)%MOD)*(K/num))%MOD;
-SPRIME4=(PRES5*(K%num)+((PRES5*num)%MOD)*(K/num))%MOD;
-SPRIME5=(PRES6*(K%num)+((PRES6*num)%MOD)*(K/num))%MOD;
-SPRIME6=(PRES7*(K%num)+((PRES7*num)%MOD)*(K/num))%MOD;
-SPRIME7=(PRES8*(K%num)+((PRES8*num)%MOD)*(K/num))%MOD;
+n0=(abmodm(N0, K, MOD)+N30)%MOD;
+SPRIME1=abmodm(PRES2, K, MOD);
+SPRIME2=abmodm(PRES3, K, MOD);
+SPRIME3=abmodm(PRES4, K, MOD);
+SPRIME4=abmodm(PRES5, K, MOD);
+SPRIME5=abmodm(PRES6, K, MOD);
+SPRIME6=abmodm(PRES7, K, MOD);
+SPRIME7=abmodm(PRES8, K, MOD);
 
 s67=SPRIME7%67; // Removed s61=S61%67;
 s71=SPRIME7%71;
@@ -990,16 +988,13 @@ long long OKOK331[331];
 STEP=K*COMMONDIFF; // Changed to PRIM29, since we are now working with 29#
 STEP4=STEP*4; // The program starts at sieving n + 4 * STEP and then sieves n + 3 * STEP, n + 2 * STEP, n + STEP, n, n - STEP, ...; I made no edits as this seems to be preferential.
 STEP5=STEP*5; // The program starts at sieving n + 5 * STEP and then sieves n + 6 * STEP, n + 7 * STEP, n + 8 * STEP, ...; I made no edits as this seems to be preferential.
-// Since 17835 * MOD ~ 2^62 in the original code, I am maintaining this equation; it seems to prevent integer overflow.
-long long num = 4611686018427387904 / MOD; // Calculating the "magic number" (the big number is 2^62)
-n0=(N0*(K%num)+((N0*num)%MOD)*(K/num)+N30)%MOD;
-SPRIME1=(PRES2*(K%num)+((PRES2*num)%MOD)*(K/num))%MOD;
-SPRIME2=(PRES3*(K%num)+((PRES3*num)%MOD)*(K/num))%MOD;
-SPRIME3=(PRES4*(K%num)+((PRES4*num)%MOD)*(K/num))%MOD;
-SPRIME4=(PRES5*(K%num)+((PRES5*num)%MOD)*(K/num))%MOD;
-SPRIME5=(PRES6*(K%num)+((PRES6*num)%MOD)*(K/num))%MOD;
-SPRIME6=(PRES7*(K%num)+((PRES7*num)%MOD)*(K/num))%MOD;
-SPRIME7=(PRES8*(K%num)+((PRES8*num)%MOD)*(K/num))%MOD;
+SPRIME1=abmodm(PRES2, K, MOD);
+SPRIME2=abmodm(PRES3, K, MOD);
+SPRIME3=abmodm(PRES4, K, MOD);
+SPRIME4=abmodm(PRES5, K, MOD);
+SPRIME5=abmodm(PRES6, K, MOD);
+SPRIME6=abmodm(PRES7, K, MOD);
+SPRIME7=abmodm(PRES8, K, MOD);
 
 s67=SPRIME7%67; // Removed s61=S61%67;
 s71=SPRIME7%71;
@@ -1019,33 +1014,33 @@ m89=MOD%89;
 m97=MOD%97;
 // m101=MOD%101; // If needed, uncomment.
 
-#include "MAKES_k29_31.H"
+#include "MAKES_k29.H"
 
 
-for(iPRIME1=0;iPRIME1<(PRIME1-20);++iPRIME1)
-for(iPRIME2=0;iPRIME2<(PRIME2-20);++iPRIME2)
-if(iPRIME2-iPRIME1<=PRIME2-21&&iPRIME1-iPRIME2<=PRIME1-21)
-for(iPRIME3=0;iPRIME3<(PRIME3-20);++iPRIME3)
-if(iPRIME3-iPRIME1<=PRIME3-21&&iPRIME3-iPRIME2<=PRIME3-21&&iPRIME1-iPRIME3<=PRIME1-21&&iPRIME2-iPRIME3<=PRIME2-21)
+for(iPRIME1=0;iPRIME1<(PRIME1-26);++iPRIME1)
+for(iPRIME2=0;iPRIME2<(PRIME2-26);++iPRIME2)
+if(iPRIME2-iPRIME1<=PRIME2-27&&iPRIME1-iPRIME2<=PRIME1-27)
+for(iPRIME3=0;iPRIME3<(PRIME3-26);++iPRIME3)
+if(iPRIME3-iPRIME1<=PRIME3-27&&iPRIME3-iPRIME2<=PRIME3-27&&iPRIME1-iPRIME3<=PRIME1-27&&iPRIME2-iPRIME3<=PRIME2-27)
 for(i3=0;i3<2;++i3)
 for(i5=0;i5<4;++i5)
+for(i=0;i<3;++i)
 {
-
-
-
+// printf("i: %lld\n", N0-63538058411340*i);
+n0=(abmodm((N0-63538058411340*i), K, MOD)+N30)%MOD;
 
 n47=(n0+i3*S3+i5*S5+iPRIME1*SPRIME1+iPRIME2*SPRIME2+iPRIME3*SPRIME3)%MOD;
 {
 // Since PRIMES1 to PRIMES8 are changed in CONST_k29.H, they do not need to be removed from the loops.
-for(iPRIME4=(PRIME4-20);iPRIME4>0;iPRIME4--) // Same comment as in line 72, but the bounds are reversed
+for(iPRIME4=(PRIME4-26);iPRIME4>0;iPRIME4--) // Same comment as in line 72, but the bounds are reversed
 {
 
 n53=n47;
-for(iPRIME5=(PRIME5-20);iPRIME5>0;iPRIME5--)
+for(iPRIME5=(PRIME5-26);iPRIME5>0;iPRIME5--)
 {
 
 n59=n53;
-for(iPRIME6=(PRIME6-20);iPRIME6>0;iPRIME6--)
+for(iPRIME6=(PRIME6-26);iPRIME6>0;iPRIME6--)
 {
 int r67, r71, r73, r79, r83, r89, r97, r101; // Similarly, to s101, m101, r61 is removed, and r101 are in comments.
 // Moreover, all these variables are processed within the same scope, so everything else are not "moved up" nor "moved down"
@@ -1058,7 +1053,7 @@ r83=n61%83;
 r89=n61%89;
 r97=n61%97;
 // r101=n61%101; // If needed, uncomment.
-for(iPRIME7=(PRIME7-20);iPRIME7>0;iPRIME7--)
+for(iPRIME7=(PRIME7-26);iPRIME7>0;iPRIME7--)
 {
 #include "SITO_kp_q.H"
 {
