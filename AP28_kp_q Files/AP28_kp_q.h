@@ -27,8 +27,9 @@ int special = constantsList[constantsIndex][2];
 int i, j, jj;
 
 long long STEP;
-long long STEP5;
-long long STEP4;
+long long STEP7;
+long long STEP8;
+long long STEP9;
 long long n0;
 long long sito;
 
@@ -235,9 +236,9 @@ long long OKOK317[317];
 long long OKOK331[331];
 
 STEP=K*COMMONDIFF; // Changed to COMMONDIFF, since AP28_kp works with various common differences.
-STEP4=STEP*4; // The program starts at sieving n + 4 * STEP and then sieves n + 3 * STEP, n + 2 * STEP, n + STEP, n, n - STEP, ...; I made no edits as this seems to be preferential.
-STEP5=STEP*5; // The program starts at sieving n + 5 * STEP and then sieves n + 6 * STEP, n + 7 * STEP, n + 8 * STEP, ...; I made no edits as this seems to be preferential.
-// Since 17835 * MOD ~ 2^62 in the original code, I am maintaining this equation; it seems to prevent integer overflow.
+STEP8=STEP*8; // The program starts at sieving n + 8 * STEP and then sieves n + 7 * STEP, n + 6 * STEP, n + 5 * STEP, n + 4 * STEP, ...
+STEP9=STEP*9; // The program starts at sieving n + 9 * STEP and then sieves n + 10 * STEP, n + 11 * STEP, n + 12 * STEP, ...
+
 n0=(abmodm(N0, K, MOD)+N30)%MOD;
 SPRIME1=abmodm(PRES2, K, MOD);
 SPRIME2=abmodm(PRES3, K, MOD);
@@ -334,7 +335,7 @@ if(q == 0 || n % q) // Added this if statement to reflect sieving mod q
 long long m;
 int k;
 
-k=0; m=n+STEP5;
+k=0; m=n+STEP9;
 while(PrimeQ(m)){
 k++;
 m+=STEP;
@@ -342,7 +343,7 @@ m+=STEP;
 
 
 if(k>=10){
-m=n+STEP4;
+m=n+STEP8;
 while(m>0&&PrimeQ(m)){
 k++;
 m-=STEP;
@@ -614,9 +615,9 @@ long long OKOK317[317];
 long long OKOK331[331];
 
 STEP=K*COMMONDIFF; // Changed to PRIM29, since we are now working with 29#
-STEP4=STEP*4; // The program starts at sieving n + 4 * STEP and then sieves n + 3 * STEP, n + 2 * STEP, n + STEP, n, n - STEP, ...; I made no edits as this seems to be preferential.
-STEP5=STEP*5; // The program starts at sieving n + 5 * STEP and then sieves n + 6 * STEP, n + 7 * STEP, n + 8 * STEP, ...; I made no edits as this seems to be preferential.
-// Since 17835 * MOD ~ 2^62 in the original code, I am maintaining this equation; it seems to prevent integer overflow.
+STEP7=STEP*7; // The program starts at sieving n + 7 * STEP and then sieves n + 6 * STEP, n + 5 * STEP, n + 4 * STEP, n + 3 * STEP, ...
+STEP8=STEP*8; // The program starts at sieving n + 8 * STEP and then sieves n + 9 * STEP, n + 10 * STEP, n + 11 * STEP, ...
+
 n0=(abmodm(N0, K, MOD)+N30)%MOD;
 SPRIME1=abmodm(PRES2, K, MOD);
 SPRIME2=abmodm(PRES3, K, MOD);
@@ -709,7 +710,7 @@ if(q == 0 || n % q) // Added this if statement to reflect sieving mod q
 long long m;
 int k;
 
-k=0; m=n+STEP5;
+k=0; m=n+STEP8;
 while(PrimeQ(m)){
 k++;
 m+=STEP;
@@ -717,7 +718,7 @@ m+=STEP;
 
 
 if(k>=10){
-m=n+STEP4;
+m=n+STEP7;
 while(m>0&&PrimeQ(m)){
 k++;
 m-=STEP;
@@ -986,8 +987,9 @@ long long OKOK317[317];
 long long OKOK331[331];
 
 STEP=K*COMMONDIFF; // Changed to PRIM29, since we are now working with 29#
-STEP4=STEP*4; // The program starts at sieving n + 4 * STEP and then sieves n + 3 * STEP, n + 2 * STEP, n + STEP, n, n - STEP, ...; I made no edits as this seems to be preferential.
-STEP5=STEP*5; // The program starts at sieving n + 5 * STEP and then sieves n + 6 * STEP, n + 7 * STEP, n + 8 * STEP, ...; I made no edits as this seems to be preferential.
+STEP7=STEP*7; // The program starts at sieving n + 7 * STEP and then sieves n + 6 * STEP, n + 5 * STEP, n + 4 * STEP, n + 3 * STEP, ...
+STEP8=STEP*8; // The program starts at sieving n + 8 * STEP and then sieves n + 9 * STEP, n + 10 * STEP, n + 11 * STEP, ...
+
 SPRIME1=abmodm(PRES2, K, MOD);
 SPRIME2=abmodm(PRES3, K, MOD);
 SPRIME3=abmodm(PRES4, K, MOD);
@@ -1079,7 +1081,7 @@ if(q == 0 || n % q) // Added this if statement to reflect sieving mod q
 long long m;
 int k;
 
-k=0; m=n+STEP5;
+k=0; m=n+STEP8;
 while(PrimeQ(m)){
 k++;
 m+=STEP;
@@ -1087,7 +1089,7 @@ m+=STEP;
 
 
 if(k>=10){
-m=n+STEP4;
+m=n+STEP7;
 while(m>0&&PrimeQ(m)){
 k++;
 m-=STEP;
