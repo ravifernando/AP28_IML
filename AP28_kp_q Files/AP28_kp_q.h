@@ -807,16 +807,17 @@ int PRIME7 = constantsList[constantsIndex][10];
 long long COMMONDIFF = constantsList[constantsIndex][3]; // COMMONDIFF is in index 3
 long long MOD = constantsList[constantsIndex][11];
 long long N0 = constantsList[constantsIndex][12];
-long long N30 = constantsList[constantsIndex][13];
-long long S3 = constantsList[constantsIndex][14];
-long long S5 = constantsList[constantsIndex][15];
-long long PRES2 = constantsList[constantsIndex][16];
-long long PRES3 = constantsList[constantsIndex][17];
-long long PRES4 = constantsList[constantsIndex][18];
-long long PRES5 = constantsList[constantsIndex][19];
-long long PRES6 = constantsList[constantsIndex][20];
-long long PRES7 = constantsList[constantsIndex][21];
-long long PRES8 = constantsList[constantsIndex][22];
+long long N0INC = constantsList[constantsIndex][13];
+long long N30 = constantsList[constantsIndex][14];
+long long S3 = constantsList[constantsIndex][15];
+long long S5 = constantsList[constantsIndex][16];
+long long PRES2 = constantsList[constantsIndex][17];
+long long PRES3 = constantsList[constantsIndex][18];
+long long PRES4 = constantsList[constantsIndex][19];
+long long PRES5 = constantsList[constantsIndex][20];
+long long PRES6 = constantsList[constantsIndex][21];
+long long PRES7 = constantsList[constantsIndex][22];
+long long PRES8 = constantsList[constantsIndex][23];
 
 // printf("p: %d\n", p);
 // printf("q: %d\n", q);
@@ -831,6 +832,7 @@ long long PRES8 = constantsList[constantsIndex][22];
 // printf("PRIME7: %d\n", PRIME7);
 // printf("MOD: %lld\n", MOD);
 // printf("N0: %lld\n", N0);
+// printf("N0INC: %lld\n", N0INC);
 // printf("N30: %lld\n", N30);
 // printf("S3: %lld\n", S3);
 // printf("S5: %lld\n", S5);
@@ -1028,8 +1030,8 @@ for(i3=0;i3<2;++i3)
 for(i5=0;i5<4;++i5)
 for(i=0;i<3;++i)
 {
-// printf("i: %lld\n", N0-63538058411340*i);
-n0=(abmodm((N0-63538058411340*i), K, MOD)+N30)%MOD;
+// printf("i: %lld\n", N0+N0INC*i);
+n0=(abmodm((N0+N0INC*i), K, MOD)+N30)%MOD;
 
 n47=(n0+i3*S3+i5*S5+iPRIME1*SPRIME1+iPRIME2*SPRIME2+iPRIME3*SPRIME3)%MOD;
 {
