@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void SearchAP28_kp_q(int K, int SHIFT, int extraPrimes)
+void SearchAP28_kp_q(int K, int SHIFT, int extraPrimes, int specialSearch)
 {
 
 long long n, n43, n47, n53, n59, n61; // Added n61 due to there being more inner loops (more additions)
@@ -10,11 +10,11 @@ int i3, i5, iPRIME1, iPRIME2, iPRIME3;
 int constantsIndex = 0;
 for (int i = 0; i < sizeof(constantsList) / sizeof(constantsList[0][0]); i++) {
     if (constantsList[i][0] == extraPrimes) {
-        if (constantsList[i][0] == 29 && constantsList[i][2] == 0) continue;
+        if (specialSearch == 1 && constantsList[i][0] == 29 && constantsList[i][2] == 0) continue;
         constantsIndex = i;
         break;
     } else if (constantsList[i][0] * constantsList[i][1] == extraPrimes) {
-        if (constantsList[i][0] == 29 && constantsList[i][2] == 0) continue;
+        if (specialSearch == 1 && constantsList[i][0] == 29 && constantsList[i][2] == 0) continue;
         constantsIndex = i;
         break;
     }
