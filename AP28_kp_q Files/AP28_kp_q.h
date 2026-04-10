@@ -27,7 +27,6 @@ int special = constantsList[constantsIndex][2];
 int i, j, jj;
 
 long long STEP;
-long long STEP7;
 long long STEP8;
 long long STEP9;
 long long n0;
@@ -615,8 +614,8 @@ long long OKOK317[317];
 long long OKOK331[331];
 
 STEP=K*COMMONDIFF; // Changed to PRIM29, since we are now working with 29#
-STEP7=STEP*7; // The program starts at sieving n + 7 * STEP and then sieves n + 6 * STEP, n + 5 * STEP, n + 4 * STEP, n + 3 * STEP, ...
-STEP8=STEP*8; // The program starts at sieving n + 8 * STEP and then sieves n + 9 * STEP, n + 10 * STEP, n + 11 * STEP, ...
+STEP8=STEP*8;
+STEP9=STEP*9;
 
 n0=(abmodm(N0, K, MOD)+N30)%MOD;
 SPRIME1=abmodm(PRES2, K, MOD);
@@ -650,20 +649,16 @@ m97=MOD%97;
 
 for(iPRIME1=0;iPRIME1<(PRIME1-26);++iPRIME1)
 for(iPRIME2=0;iPRIME2<(PRIME2-26);++iPRIME2)
-if(iPRIME2-iPRIME1<=PRIME2-27&&iPRIME1-iPRIME2<=PRIME1-27)
+if(iPRIME2-iPRIME1<=PRIME1-27&&iPRIME1-iPRIME2<=special-27)
 for(iPRIME3=0;iPRIME3<(PRIME3-26);++iPRIME3)
-if(iPRIME3-iPRIME1<=PRIME3-27&&iPRIME3-iPRIME2<=PRIME3-27&&iPRIME1-iPRIME3<=PRIME1-27&&iPRIME2-iPRIME3<=PRIME2-27)
+if(iPRIME3-iPRIME1<=PRIME2-27&&iPRIME3-iPRIME2<=PRIME2-27&&iPRIME1-iPRIME3<=special-27&&iPRIME2-iPRIME3<=PRIME1-27)
+for(iPRIME4=0;iPRIME4<(PRIME4-26);++iPRIME4)
+if(iPRIME4-iPRIME1<=PRIME3-27&&iPRIME4-iPRIME2<=PRIME3-27&&iPRIME4-iPRIME3<=PRIME3-27&&iPRIME1-iPRIME4<=special-27&&iPRIME2-iPRIME4<=PRIME1-27&&iPRIME3-iPRIME4<=PRIME2-27)
 for(i3=0;i3<2;++i3)
 for(i5=0;i5<4;++i5)
 {
 
-
-
-
-n47=(n0+i3*S3+i5*S5+iPRIME1*SPRIME1+iPRIME2*SPRIME2+iPRIME3*SPRIME3)%MOD;
-{
-// Since PRIMES1 to PRIMES8 are changed in CONST_k29.H, they do not need to be removed from the loops.
-for(iPRIME4=(PRIME4-26);iPRIME4>0;iPRIME4--) // Same comment as in line 72, but the bounds are reversed
+n47=(n0+i3*S3+i5*S5+iPRIME1*SPRIME1+iPRIME2*SPRIME2+iPRIME3*SPRIME3+iPRIME4*SPRIME4)%MOD;
 {
 
 n53=n47;
@@ -710,7 +705,7 @@ if(q == 0 || n % q) // Added this if statement to reflect sieving mod q
 long long m;
 int k;
 
-k=0; m=n+STEP8;
+k=0; m=n+STEP9;
 while(PrimeQ(m)){
 k++;
 m+=STEP;
@@ -718,7 +713,7 @@ m+=STEP;
 
 
 if(k>=10){
-m=n+STEP7;
+m=n+STEP8;
 while(m>0&&PrimeQ(m)){
 k++;
 m-=STEP;
@@ -785,9 +780,6 @@ n53+=SPRIME5;
 if(n53>=MOD)n53-=MOD;
 }
 
-n47+=SPRIME4;
-if(n47>=MOD)n47-=MOD;
-}
 };
 
 
@@ -989,8 +981,8 @@ long long OKOK317[317];
 long long OKOK331[331];
 
 STEP=K*COMMONDIFF; // Changed to PRIM29, since we are now working with 29#
-STEP7=STEP*7; // The program starts at sieving n + 7 * STEP and then sieves n + 6 * STEP, n + 5 * STEP, n + 4 * STEP, n + 3 * STEP, ...
-STEP8=STEP*8; // The program starts at sieving n + 8 * STEP and then sieves n + 9 * STEP, n + 10 * STEP, n + 11 * STEP, ...
+STEP8=STEP*8;
+STEP9=STEP*9;
 
 SPRIME1=abmodm(PRES2, K, MOD);
 SPRIME2=abmodm(PRES3, K, MOD);
@@ -1023,9 +1015,11 @@ m97=MOD%97;
 
 for(iPRIME1=0;iPRIME1<(PRIME1-26);++iPRIME1)
 for(iPRIME2=0;iPRIME2<(PRIME2-26);++iPRIME2)
-if(iPRIME2-iPRIME1<=PRIME2-27&&iPRIME1-iPRIME2<=PRIME1-27)
+if(iPRIME2-iPRIME1<=PRIME1-27&&iPRIME1-iPRIME2<=special-27)
 for(iPRIME3=0;iPRIME3<(PRIME3-26);++iPRIME3)
-if(iPRIME3-iPRIME1<=PRIME3-27&&iPRIME3-iPRIME2<=PRIME3-27&&iPRIME1-iPRIME3<=PRIME1-27&&iPRIME2-iPRIME3<=PRIME2-27)
+if(iPRIME3-iPRIME1<=PRIME2-27&&iPRIME3-iPRIME2<=PRIME2-27&&iPRIME1-iPRIME3<=special-27&&iPRIME2-iPRIME3<=PRIME1-27)
+for(iPRIME4=0;iPRIME4<(PRIME4-26);++iPRIME4)
+if(iPRIME4-iPRIME1<=PRIME3-27&&iPRIME4-iPRIME2<=PRIME3-27&&iPRIME4-iPRIME3<=PRIME3-27&&iPRIME1-iPRIME4<=special-27&&iPRIME2-iPRIME4<=PRIME1-27&&iPRIME3-iPRIME4<=PRIME2-27)
 for(i3=0;i3<2;++i3)
 for(i5=0;i5<4;++i5)
 for(i=0;i<3;++i)
@@ -1033,10 +1027,7 @@ for(i=0;i<3;++i)
 // printf("i: %lld\n", N0+N0INC*i);
 n0=(abmodm((N0+N0INC*i), K, MOD)+N30)%MOD;
 
-n47=(n0+i3*S3+i5*S5+iPRIME1*SPRIME1+iPRIME2*SPRIME2+iPRIME3*SPRIME3)%MOD;
-{
-// Since PRIMES1 to PRIMES8 are changed in CONST_k29.H, they do not need to be removed from the loops.
-for(iPRIME4=(PRIME4-26);iPRIME4>0;iPRIME4--) // Same comment as in line 72, but the bounds are reversed
+n47=(n0+i3*S3+i5*S5+iPRIME1*SPRIME1+iPRIME2*SPRIME2+iPRIME3*SPRIME3+iPRIME4*SPRIME4)%MOD;
 {
 
 n53=n47;
@@ -1083,7 +1074,7 @@ if(q == 0 || n % q) // Added this if statement to reflect sieving mod q
 long long m;
 int k;
 
-k=0; m=n+STEP8;
+k=0; m=n+STEP9;
 while(PrimeQ(m)){
 k++;
 m+=STEP;
@@ -1091,7 +1082,7 @@ m+=STEP;
 
 
 if(k>=10){
-m=n+STEP7;
+m=n+STEP8;
 while(m>0&&PrimeQ(m)){
 k++;
 m-=STEP;
@@ -1158,9 +1149,6 @@ n53+=SPRIME5;
 if(n53>=MOD)n53-=MOD;
 }
 
-n47+=SPRIME4;
-if(n47>=MOD)n47-=MOD;
-}
 };
 
 

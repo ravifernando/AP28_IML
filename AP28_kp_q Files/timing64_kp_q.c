@@ -8,6 +8,7 @@
 #include <sys/resource.h>
 
 #include "PrimeQ64.h"
+#include "../abmod.h"
 //#include "PrimeQ32.h" 
 // choose 64 or 32 bit version above
 

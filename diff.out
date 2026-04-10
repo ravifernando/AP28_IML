@@ -1,0 +1,1244 @@
+diff --git a/AP28_kp_q Files/AP28_kp_q.h b/AP28_kp_q Files/AP28_kp_q.h
+index ad190f2..81f85ba 100644
+--- a/AP28_kp_q Files/AP28_kp_q.h	
++++ b/AP28_kp_q Files/AP28_kp_q.h	
+@@ -1,9 +1,10 @@
+ #include <stdio.h>
++#include "../abmod.h"
+ 
+ void SearchAP28_kp_q(int K, int SHIFT, int extraPrimes)
+ {
+ 
+-long long n, n43, n47, n53, n59, n61; // Added n61 due to there being more inner loops (more additions)
++long long n, n37, n43, n47, n53, n59, n61; // Added n61 due to there being more inner loops (more additions)
+ int iPRIME4, iPRIME5, iPRIME6, iPRIME7, iPRIME8;
+ int i3, i5, iPRIME1, iPRIME2, iPRIME3;
+ 
+@@ -27,9 +28,8 @@ int special = constantsList[constantsIndex][2];
+ int i, j, jj;
+ 
+ long long STEP;
+-long long STEP7;
+-long long STEP8;
+-long long STEP9;
++long long STEP5;
++long long STEP4;
+ long long n0;
+ long long sito;
+ 
+@@ -185,6 +185,16 @@ char OK509[509];
+ char OK521[521];
+ char OK523[523];
+ char OK541[541];
++char OK547[547];
++char OK557[557];
++char OK563[563];
++char OK569[569];
++char OK571[571];
++char OK577[577];
++char OK587[587];
++char OK593[593];
++char OK599[599];
++char OK601[601];
+ long long OKOK67[67];
+ long long OKOK71[71];
+ long long OKOK73[73];
+@@ -234,11 +244,12 @@ long long OKOK311[311];
+ long long OKOK313[313];
+ long long OKOK317[317];
+ long long OKOK331[331];
++long long OKOK337[337];
+ 
+ STEP=K*COMMONDIFF; // Changed to COMMONDIFF, since AP28_kp works with various common differences.
+-STEP8=STEP*8; // The program starts at sieving n + 8 * STEP and then sieves n + 7 * STEP, n + 6 * STEP, n + 5 * STEP, n + 4 * STEP, ...
+-STEP9=STEP*9; // The program starts at sieving n + 9 * STEP and then sieves n + 10 * STEP, n + 11 * STEP, n + 12 * STEP, ...
+-
++STEP4=STEP*4;
++STEP5=STEP*5;
++// Overflow-safe modular multiplication replaces the old "num trick" (2^62 / MOD split)
+ n0=(abmodm(N0, K, MOD)+N30)%MOD;
+ SPRIME1=abmodm(PRES2, K, MOD);
+ SPRIME2=abmodm(PRES3, K, MOD);
+@@ -322,7 +333,13 @@ if((sito>>b)&1)
+ 
+ n=n61+(b+SHIFT)*MOD;
+ 
++#if defined(SIEVE_STOP_463)
++#include "IF_463.H"
++#elif defined(SIEVE_STOP_601)
++#include "IF_601.H"
++#else
+ #include "IF.H"
++#endif
+ if(n%7) // Sieving for primes from 7 to 23 and p
+ if(n%11)
+ if(n%13)
+@@ -335,7 +352,7 @@ if(q == 0 || n % q) // Added this if statement to reflect sieving mod q
+ long long m;
+ int k;
+ 
+-k=0; m=n+STEP9;
++k=0; m=n+STEP5;
+ while(PrimeQ(m)){
+ k++;
+ m+=STEP;
+@@ -343,7 +360,7 @@ m+=STEP;
+ 
+ 
+ if(k>=10){
+-m=n+STEP8;
++m=n+STEP4;
+ while(m>0&&PrimeQ(m)){
+ k++;
+ m-=STEP;
+@@ -422,7 +439,7 @@ if(n43>=MOD)n43-=MOD;
+ }
+ }
+ }
+-else if (q != 31) {
++else {
+ 
+ int PRIME1 = constantsList[constantsIndex][4]; // skipping index 3 is intentional
+ int PRIME2 = constantsList[constantsIndex][5];
+@@ -564,6 +581,16 @@ char OK509[509];
+ char OK521[521];
+ char OK523[523];
+ char OK541[541];
++char OK547[547];
++char OK557[557];
++char OK563[563];
++char OK569[569];
++char OK571[571];
++char OK577[577];
++char OK587[587];
++char OK593[593];
++char OK599[599];
++char OK601[601];
+ long long OKOK67[67];
+ long long OKOK71[71];
+ long long OKOK73[73];
+@@ -613,11 +640,12 @@ long long OKOK311[311];
+ long long OKOK313[313];
+ long long OKOK317[317];
+ long long OKOK331[331];
++long long OKOK337[337];
+ 
+ STEP=K*COMMONDIFF; // Changed to PRIM29, since we are now working with 29#
+-STEP7=STEP*7; // The program starts at sieving n + 7 * STEP and then sieves n + 6 * STEP, n + 5 * STEP, n + 4 * STEP, n + 3 * STEP, ...
+-STEP8=STEP*8; // The program starts at sieving n + 8 * STEP and then sieves n + 9 * STEP, n + 10 * STEP, n + 11 * STEP, ...
+-
++STEP4=STEP*4;
++STEP5=STEP*5;
++// Overflow-safe modular multiplication replaces the old "num trick" (2^62 / MOD split)
+ n0=(abmodm(N0, K, MOD)+N30)%MOD;
+ SPRIME1=abmodm(PRES2, K, MOD);
+ SPRIME2=abmodm(PRES3, K, MOD);
+@@ -648,399 +676,87 @@ m97=MOD%97;
+ #include "MAKES_k29.H"
+ 
+ 
++#if NUM_OUTER_PRIMES == 2
++
+ for(iPRIME1=0;iPRIME1<(PRIME1-26);++iPRIME1)
+ for(iPRIME2=0;iPRIME2<(PRIME2-26);++iPRIME2)
+-if(iPRIME2-iPRIME1<=PRIME2-27&&iPRIME1-iPRIME2<=PRIME1-27)
+-for(iPRIME3=0;iPRIME3<(PRIME3-26);++iPRIME3)
+-if(iPRIME3-iPRIME1<=PRIME3-27&&iPRIME3-iPRIME2<=PRIME3-27&&iPRIME1-iPRIME3<=PRIME1-27&&iPRIME2-iPRIME3<=PRIME2-27)
++if(iPRIME2-iPRIME1<=14&&iPRIME1-iPRIME2<=10)
+ for(i3=0;i3<2;++i3)
+ for(i5=0;i5<4;++i5)
+ {
+ 
+-
+-
+-
+-n47=(n0+i3*S3+i5*S5+iPRIME1*SPRIME1+iPRIME2*SPRIME2+iPRIME3*SPRIME3)%MOD;
+-{
+-// Since PRIMES1 to PRIMES8 are changed in CONST_k29.H, they do not need to be removed from the loops.
+-for(iPRIME4=(PRIME4-26);iPRIME4>0;iPRIME4--) // Same comment as in line 72, but the bounds are reversed
+-{
+-
+-n53=n47;
+-for(iPRIME5=(PRIME5-26);iPRIME5>0;iPRIME5--)
++n37=(n0+i3*S3+i5*S5+iPRIME1*SPRIME1+iPRIME2*SPRIME2)%MOD;
+ {
+ 
+-n59=n53;
+-for(iPRIME6=(PRIME6-26);iPRIME6>0;iPRIME6--)
+-{
+-int r67, r71, r73, r79, r83, r89, r97, r101; // Similarly, to s101, m101, r61 is removed, and r101 are in comments.
+-// Moreover, all these variables are processed within the same scope, so everything else are not "moved up" nor "moved down"
+-n61=n59;
+-r67=n61%67; // Removed r61=n61%61;
+-r71=n61%71;
+-r73=n61%73;
+-r79=n61%79;
+-r83=n61%83;
+-r89=n61%89;
+-r97=n61%97;
+-// r101=n61%101; // If needed, uncomment.
+-for(iPRIME7=(PRIME7-26);iPRIME7>0;iPRIME7--)
++n43=n37;
++for(iPRIME3=(PRIME3-26);iPRIME3>0;iPRIME3--)
+ {
+-#include "SITO_kp_q.H"
++n47=n43;
++for(iPRIME4=(PRIME4-26);iPRIME4>0;iPRIME4--)
+ {
+-int b;
+ 
+-for(b=0;b<64;b++)
+-if((sito>>b)&1)
++#elif NUM_OUTER_PRIMES == 3
+ 
++for(iPRIME1=0;iPRIME1<(PRIME1-26);++iPRIME1)
++for(iPRIME2=0;iPRIME2<(PRIME2-26);++iPRIME2)
++if(iPRIME2-iPRIME1<=14&&iPRIME1-iPRIME2<=10)
++for(iPRIME3=0;iPRIME3<(PRIME3-26);++iPRIME3)
++if(iPRIME3-iPRIME1<=16&&iPRIME3-iPRIME2<=16&&iPRIME1-iPRIME3<=10&&iPRIME2-iPRIME3<=14)
++for(i3=0;i3<2;++i3)
++for(i5=0;i5<4;++i5)
+ {
+ 
+-n=n61+(b+SHIFT)*MOD;
+-
+-#include "IF.H"
+-if(n%7) // Sieving for primes from 7 to 29
+-if(n%11)
+-if(n%13)
+-if(n%17)
+-if(n%19)
+-if(n%23)
+-if(n%p) // Added this if statement to reflect sieving mod p
+-if(q == 0 || n % q) // Added this if statement to reflect sieving mod q
++n43=(n0+i3*S3+i5*S5+iPRIME1*SPRIME1+iPRIME2*SPRIME2+iPRIME3*SPRIME3)%MOD;
+ {
+-long long m;
+-int k;
+-
+-k=0; m=n+STEP8;
+-while(PrimeQ(m)){
+-k++;
+-m+=STEP;
+-};
+-
+-
+-if(k>=10){
+-m=n+STEP7;
+-while(m>0&&PrimeQ(m)){
+-k++;
+-m-=STEP;
+-};
+-};
+ 
+-
+-
+-if(k>=10)
++n47=n43;
++for(iPRIME4=(PRIME4-26);iPRIME4>0;iPRIME4--)
+ {
+ 
+-ReportSolution(k,K,m+STEP);
+-};
+-};
+-
+-}
+-
+-}
+-if(iPRIME7>1){
+-n61+=SPRIME7;
+-r67+=s67; // Removed r61+=s61;
+-r71+=s71;
+-r73+=s73;
+-r79+=s79;
+-r83+=s83;
+-r89+=s89;
+-r97+=s97;
+-// r101+=s101; // If needed, uncomment.
+-if(n61>=MOD){
+-n61-=MOD;
+-r67-=m67; // Removed r61-=m61;
+-r71-=m71;
+-r73-=m73;
+-r79-=m79;
+-r83-=m83;
+-r89-=m89;
+-r97-=m97;
+-// r101-=m101; // If needed, uncomment.
+-if(r67<0)r67+=67; // Removed if(r61<0)r61+=61;
+-if(r71<0)r71+=71;
+-if(r73<0)r73+=73;
+-if(r79<0)r79+=79;
+-if(r83<0)r83+=83;
+-if(r89<0)r89+=89;
+-if(r97<0)r97+=97;
+-// if(r101<0)r101+=101; // If needed, uncomment.
+-};
+-if(r67>=67)r67-=67; // Removed if(r61>=61)r61-=61;
+-if(r71>=71)r71-=71;
+-if(r73>=73)r73-=73;
+-if(r79>=79)r79-=79;
+-if(r83>=83)r83-=83;
+-if(r89>=89)r89-=89;
+-if(r97>=97)r97-=97;
+-// if(r101>=101)r101-=101; // If needed, uncomment.
+-}
+-}
+-
+-n59+=SPRIME6;
+-if(n59>=MOD)n59-=MOD;
+-}
+-
+-n53+=SPRIME5;
+-if(n53>=MOD)n53-=MOD;
+-}
+-
+-n47+=SPRIME4;
+-if(n47>=MOD)n47-=MOD;
+-}
+-};
+-
+-
+-}
+-}
+-}
+-else {
+-
+-int PRIME1 = constantsList[constantsIndex][4]; // skipping index 3 is intentional
+-int PRIME2 = constantsList[constantsIndex][5];
+-int PRIME3 = constantsList[constantsIndex][6];
+-int PRIME4 = constantsList[constantsIndex][7];
+-int PRIME5 = constantsList[constantsIndex][8];
+-int PRIME6 = constantsList[constantsIndex][9];
+-int PRIME7 = constantsList[constantsIndex][10];
++#elif NUM_OUTER_PRIMES == 5
+ 
+-long long COMMONDIFF = constantsList[constantsIndex][3]; // COMMONDIFF is in index 3
+-long long MOD = constantsList[constantsIndex][11];
+-long long N0 = constantsList[constantsIndex][12];
+-long long N0INC = constantsList[constantsIndex][13];
+-long long N30 = constantsList[constantsIndex][14];
+-long long S3 = constantsList[constantsIndex][15];
+-long long S5 = constantsList[constantsIndex][16];
+-long long PRES2 = constantsList[constantsIndex][17];
+-long long PRES3 = constantsList[constantsIndex][18];
+-long long PRES4 = constantsList[constantsIndex][19];
+-long long PRES5 = constantsList[constantsIndex][20];
+-long long PRES6 = constantsList[constantsIndex][21];
+-long long PRES7 = constantsList[constantsIndex][22];
+-long long PRES8 = constantsList[constantsIndex][23];
+-
+-// printf("p: %d\n", p);
+-// printf("q: %d\n", q);
+-// printf("special: %d\n", special);
+-// printf("COMMONDIFF: %lld\n", COMMONDIFF);
+-// printf("PRIME1: %d\n", PRIME1);
+-// printf("PRIME2: %d\n", PRIME2);
+-// printf("PRIME3: %d\n", PRIME3);
+-// printf("PRIME4: %d\n", PRIME4);
+-// printf("PRIME5: %d\n", PRIME5);
+-// printf("PRIME6: %d\n", PRIME6);
+-// printf("PRIME7: %d\n", PRIME7);
+-// printf("MOD: %lld\n", MOD);
+-// printf("N0: %lld\n", N0);
+-// printf("N0INC: %lld\n", N0INC);
+-// printf("N30: %lld\n", N30);
+-// printf("S3: %lld\n", S3);
+-// printf("S5: %lld\n", S5);
+-// printf("PRES2: %lld\n", PRES2);
+-// printf("PRES3: %lld\n", PRES3);
+-// printf("PRES4: %lld\n", PRES4);
+-// printf("PRES5: %lld\n", PRES5);
+-// printf("PRES6: %lld\n", PRES6);
+-// printf("PRES7: %lld\n", PRES7);
+-// printf("PRES8: %lld\n", PRES8);
+-
+-if(
+-		K%PRIME1&& // No need to change, because I am changing the values in CONST_k29.H
+-		K%PRIME2&&
+-		K%PRIME3&&
+-		K%PRIME4&&
+-		K%PRIME5&&
+-		K%PRIME6&&
+-		K%PRIME7&&
+-		K%special
+-     )
++for(iPRIME1=0;iPRIME1<(PRIME1-26);++iPRIME1)
++for(iPRIME2=0;iPRIME2<(PRIME2-26);++iPRIME2)
++if(iPRIME2-iPRIME1<=14&&iPRIME1-iPRIME2<=10)
++for(iPRIME3=0;iPRIME3<(PRIME3-26);++iPRIME3)
++if(iPRIME3-iPRIME1<=16&&iPRIME3-iPRIME2<=16&&iPRIME1-iPRIME3<=10&&iPRIME2-iPRIME3<=14)
++for(iPRIME4=0;iPRIME4<(PRIME4-26);++iPRIME4)
++if(iPRIME4-iPRIME1<=20&&iPRIME4-iPRIME2<=20&&iPRIME4-iPRIME3<=20&&iPRIME1-iPRIME4<=10&&iPRIME2-iPRIME4<=14&&iPRIME3-iPRIME4<=16)
++for(iPRIME5=0;iPRIME5<(PRIME5-26);++iPRIME5)
++if(iPRIME5-iPRIME1<=24&&iPRIME5-iPRIME2<=24&&iPRIME5-iPRIME3<=24&&iPRIME5-iPRIME4<=24&&iPRIME1-iPRIME5<=10&&iPRIME2-iPRIME5<=14&&iPRIME3-iPRIME5<=16&&iPRIME4-iPRIME5<=20)
++for(i3=0;i3<2;++i3)
++for(i5=0;i5<4;++i5)
+ {
+ 
+-char OK67[67];
+-char OK71[71];
+-char OK73[73];
+-char OK79[79];
+-char OK83[83];
+-char OK89[89];
+-char OK97[97];
+-char OK101[101];
+-char OK103[103];
+-char OK107[107];
+-char OK109[109];
+-char OK113[113];
+-char OK127[127];
+-char OK131[131];
+-char OK137[137];
+-char OK139[139];
+-char OK149[149];
+-char OK151[151];
+-char OK157[157];
+-char OK163[163];
+-char OK167[167];
+-char OK173[173];
+-char OK179[179];
+-char OK181[181];
+-char OK191[191];
+-char OK193[193];
+-char OK197[197];
+-char OK199[199];
+-char OK211[211];
+-char OK223[223];
+-char OK227[227];
+-char OK229[229];
+-char OK233[233];
+-char OK239[239];
+-char OK241[241];
+-char OK251[251];
+-char OK257[257];
+-char OK263[263];
+-char OK269[269];
+-char OK271[271];
+-char OK277[277];
+-char OK281[281];
+-char OK283[283];
+-char OK293[293];
+-char OK307[307];
+-char OK311[311];
+-char OK313[313];
+-char OK317[317];
+-char OK331[331];
+-char OK337[337];
+-char OK347[347];
+-char OK349[349];
+-char OK353[353];
+-char OK359[359];
+-char OK367[367];
+-char OK373[373];
+-char OK379[379];
+-char OK383[383];
+-char OK389[389];
+-char OK397[397];
+-char OK401[401];
+-char OK409[409];
+-char OK419[419];
+-char OK421[421];
+-char OK431[431];
+-char OK433[433];
+-char OK439[439];
+-char OK443[443];
+-char OK449[449];
+-char OK457[457];
+-char OK461[461];
+-char OK463[463];
+-char OK467[467];
+-char OK479[479];
+-char OK487[487];
+-char OK491[491];
+-char OK499[499];
+-char OK503[503];
+-char OK509[509];
+-char OK521[521];
+-char OK523[523];
+-char OK541[541];
+-long long OKOK67[67];
+-long long OKOK71[71];
+-long long OKOK73[73];
+-long long OKOK79[79];
+-long long OKOK83[83];
+-long long OKOK89[89];
+-long long OKOK97[97];
+-long long OKOK101[101];
+-long long OKOK103[103];
+-long long OKOK107[107];
+-long long OKOK109[109];
+-long long OKOK113[113];
+-long long OKOK127[127];
+-long long OKOK131[131];
+-long long OKOK137[137];
+-long long OKOK139[139];
+-long long OKOK149[149];
+-long long OKOK151[151];
+-long long OKOK157[157];
+-long long OKOK163[163];
+-long long OKOK167[167];
+-long long OKOK173[173];
+-long long OKOK179[179];
+-long long OKOK181[181];
+-long long OKOK191[191];
+-long long OKOK193[193];
+-long long OKOK197[197];
+-long long OKOK199[199];
+-long long OKOK211[211];
+-long long OKOK223[223];
+-long long OKOK227[227];
+-long long OKOK229[229];
+-long long OKOK233[233];
+-long long OKOK239[239];
+-long long OKOK241[241];
+-long long OKOK251[251];
+-long long OKOK257[257];
+-long long OKOK263[263];
+-long long OKOK269[269];
+-long long OKOK271[271];
+-long long OKOK277[277];
+-long long OKOK281[281];
+-long long OKOK283[283];
+-long long OKOK293[293];
+-long long OKOK307[307];
+-long long OKOK311[311];
+-long long OKOK313[313];
+-long long OKOK317[317];
+-long long OKOK331[331];
+-
+-STEP=K*COMMONDIFF; // Changed to PRIM29, since we are now working with 29#
+-STEP7=STEP*7; // The program starts at sieving n + 7 * STEP and then sieves n + 6 * STEP, n + 5 * STEP, n + 4 * STEP, n + 3 * STEP, ...
+-STEP8=STEP*8; // The program starts at sieving n + 8 * STEP and then sieves n + 9 * STEP, n + 10 * STEP, n + 11 * STEP, ...
+-
+-SPRIME1=abmodm(PRES2, K, MOD);
+-SPRIME2=abmodm(PRES3, K, MOD);
+-SPRIME3=abmodm(PRES4, K, MOD);
+-SPRIME4=abmodm(PRES5, K, MOD);
+-SPRIME5=abmodm(PRES6, K, MOD);
+-SPRIME6=abmodm(PRES7, K, MOD);
+-SPRIME7=abmodm(PRES8, K, MOD);
+-
+-s67=SPRIME7%67; // Removed s61=S61%67;
+-s71=SPRIME7%71;
+-s73=SPRIME7%73;
+-s79=SPRIME7%79;
+-s83=SPRIME7%83;
+-s89=SPRIME7%89;
+-s97=SPRIME7%97;
+-// s101=SPRIME7%101; // If needed, uncomment.
+-
+-m67=MOD%67; // Removed m61=MOD%61;
+-m71=MOD%71;
+-m73=MOD%73;
+-m79=MOD%79;
+-m83=MOD%83;
+-m89=MOD%89;
+-m97=MOD%97;
+-// m101=MOD%101; // If needed, uncomment.
+-
+-#include "MAKES_k29.H"
++n53=(n0+i3*S3+i5*S5+iPRIME1*SPRIME1+iPRIME2*SPRIME2+iPRIME3*SPRIME3+iPRIME4*SPRIME4+iPRIME5*SPRIME5)%MOD;
++{
+ 
++#else /* NUM_OUTER_PRIMES == 4 or unset (default) */
+ 
+ for(iPRIME1=0;iPRIME1<(PRIME1-26);++iPRIME1)
+ for(iPRIME2=0;iPRIME2<(PRIME2-26);++iPRIME2)
+-if(iPRIME2-iPRIME1<=PRIME2-27&&iPRIME1-iPRIME2<=PRIME1-27)
++if(iPRIME2-iPRIME1<=14&&iPRIME1-iPRIME2<=10)
+ for(iPRIME3=0;iPRIME3<(PRIME3-26);++iPRIME3)
+-if(iPRIME3-iPRIME1<=PRIME3-27&&iPRIME3-iPRIME2<=PRIME3-27&&iPRIME1-iPRIME3<=PRIME1-27&&iPRIME2-iPRIME3<=PRIME2-27)
++if(iPRIME3-iPRIME1<=16&&iPRIME3-iPRIME2<=16&&iPRIME1-iPRIME3<=10&&iPRIME2-iPRIME3<=14)
++for(iPRIME4=0;iPRIME4<(PRIME4-26);++iPRIME4)
++if(iPRIME4-iPRIME1<=20&&iPRIME4-iPRIME2<=20&&iPRIME4-iPRIME3<=20&&iPRIME1-iPRIME4<=10&&iPRIME2-iPRIME4<=14&&iPRIME3-iPRIME4<=16)
+ for(i3=0;i3<2;++i3)
+ for(i5=0;i5<4;++i5)
+-for(i=0;i<3;++i)
+ {
+-// printf("i: %lld\n", N0+N0INC*i);
+-n0=(abmodm((N0+N0INC*i), K, MOD)+N30)%MOD;
+ 
+-n47=(n0+i3*S3+i5*S5+iPRIME1*SPRIME1+iPRIME2*SPRIME2+iPRIME3*SPRIME3)%MOD;
++n47=(n0+i3*S3+i5*S5+iPRIME1*SPRIME1+iPRIME2*SPRIME2+iPRIME3*SPRIME3+iPRIME4*SPRIME4)%MOD;
+ {
++
++#endif
++
++#if NUM_OUTER_PRIMES == 5
++// For 5 outer primes, iPRIME5 is already in the outer loop; inner starts at iPRIME6.
++#else
+ // Since PRIMES1 to PRIMES8 are changed in CONST_k29.H, they do not need to be removed from the loops.
+-for(iPRIME4=(PRIME4-26);iPRIME4>0;iPRIME4--) // Same comment as in line 72, but the bounds are reversed
+-{
+ 
+ n53=n47;
+ for(iPRIME5=(PRIME5-26);iPRIME5>0;iPRIME5--)
++#endif
+ {
+ 
+ n59=n53;
+@@ -1070,7 +786,13 @@ if((sito>>b)&1)
+ 
+ n=n61+(b+SHIFT)*MOD;
+ 
++#if defined(SIEVE_STOP_463)
++#include "IF_463.H"
++#elif defined(SIEVE_STOP_601)
++#include "IF_601.H"
++#else
+ #include "IF.H"
++#endif
+ if(n%7) // Sieving for primes from 7 to 29
+ if(n%11)
+ if(n%13)
+@@ -1083,7 +805,7 @@ if(q == 0 || n % q) // Added this if statement to reflect sieving mod q
+ long long m;
+ int k;
+ 
+-k=0; m=n+STEP8;
++k=0; m=n+STEP5;
+ while(PrimeQ(m)){
+ k++;
+ m+=STEP;
+@@ -1091,7 +813,7 @@ m+=STEP;
+ 
+ 
+ if(k>=10){
+-m=n+STEP7;
++m=n+STEP4;
+ while(m>0&&PrimeQ(m)){
+ k++;
+ m-=STEP;
+@@ -1154,17 +876,43 @@ n59+=SPRIME6;
+ if(n59>=MOD)n59-=MOD;
+ }
+ 
++#if NUM_OUTER_PRIMES == 5
++}
++#else
+ n53+=SPRIME5;
+ if(n53>=MOD)n53-=MOD;
+ }
++#endif
++
++#if NUM_OUTER_PRIMES >= 4
++
++}
++
++#elif NUM_OUTER_PRIMES == 3
+ 
+ n47+=SPRIME4;
+ if(n47>=MOD)n47-=MOD;
+ }
+-};
+ 
++}
++
++#else /* NUM_OUTER_PRIMES == 2 */
++
++n47+=SPRIME4;
++if(n47>=MOD)n47-=MOD;
++}
++
++n43+=SPRIME3;
++if(n43>=MOD)n43-=MOD;
++}
+ 
+ }
++
++#endif
++
++};
++
++
+ }
+ }
+ }
+diff --git a/AP28_kp_q Files/CONST_Generator.cpp b/AP28_kp_q Files/CONST_Generator.cpp
+index 44f454d..19b5b26 100644
+--- a/AP28_kp_q Files/CONST_Generator.cpp	
++++ b/AP28_kp_q Files/CONST_Generator.cpp	
+@@ -7,7 +7,7 @@
+ // A C++ program to demonstrate
+ // working of Chinese remainder
+ // Theorem
+-#include <bits/stdc++.h>
++#include <set>
+ 
+ // Returns modulo inverse of a
+ // with respect to m using
+@@ -277,28 +277,8 @@ void constWriter(
+ }
+ 
+ int main(int argc, char const *argv[]) {
+-  std::vector<long long> commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 37 };
+-  std::vector<long long> primesForCandidates = { 2, 3, 5, 31, 41, 43, 47, 53, 59, 61, 67 };
+-  std::vector<long long> ExtraPrimes = { 29, 31, 37, 41, 43, 47, 53, 59, 61 };
+-  // for (int i = 0; i < ExtraPrimes.size(); i++) {
+-  //   for (int j = i + 1; j < ExtraPrimes.size(); j++) {
+-  //     commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };
+-  //     commonDifferenceDivisors.push_back(ExtraPrimes.at(i));
+-  //     commonDifferenceDivisors.push_back(ExtraPrimes.at(j));
+-  //     primesForCandidates = { 2, 3, 5, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67 };
+-  //     primesForCandidates.erase(std::remove(primesForCandidates.begin(), primesForCandidates.end(), ExtraPrimes.at(i)), primesForCandidates.end());
+-  //     primesForCandidates.erase(std::remove(primesForCandidates.begin(), primesForCandidates.end(), ExtraPrimes.at(j)), primesForCandidates.end());
+-  //     // for (int k = 0; k < commonDifferenceDivisors.size(); k++) {
+-  //     //   std::cout << commonDifferenceDivisors.at(k) << ", ";
+-  //     // }
+-  //     // std::cout << std::endl;
+-  //     // for (int t = 0; t < primesForCandidates.size(); t++) {
+-  //     //   std::cout << primesForCandidates.at(t) << ", ";
+-  //     // }
+-  //     // std::cout << std::endl;
+-  //     constWriter("TEST.H", commonDifferenceDivisors, primesForCandidates, 0, 0, 331, 541);
+-  //   }
+-  // }
+-  constWriter("CONST_kp_q.H", commonDifferenceDivisors, primesForCandidates, 0, 0, 331, 541);
++  std::vector<long long> commonDifferenceDivisors = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31 };
++  std::vector<long long> primesForCandidates = { 2, 3, 5, 37, 41, 43, 47, 53, 59, 61, 67 };
++  constWriter("CONST_k29_31_special37.H", commonDifferenceDivisors, primesForCandidates, 37, 3, 331, 541);
+   return 0;
+ }
+\ No newline at end of file
+diff --git a/AP28_kp_q Files/CONST_kp_q.H b/AP28_kp_q Files/CONST_kp_q.H
+index e7432bf..1710e5b 100644
+--- a/AP28_kp_q Files/CONST_kp_q.H	
++++ b/AP28_kp_q Files/CONST_kp_q.H	
+@@ -52,33 +52,6 @@ For reference of each element (that corresponds to a special prime search):
+     long long PRES6;
+     long long PRES7;
+     long long PRES8;
+-
+-For reference of each element (that corresponds to the k29_31 with 37 semi-special prime search):
+-
+-    int p;
+-    int q;
+-    int special;
+-    long long COMMONDIFF;
+-    int PRIME1;
+-    int PRIME2;
+-    int PRIME3;
+-    int PRIME4;
+-    int PRIME5;
+-    int PRIME6;
+-    int PRIME7;
+-    long long MOD;
+-    long long N0;
+-    long long N0INC;
+-    long long N30;
+-    long long S3;
+-    long long S5;
+-    long long PRES2;
+-    long long PRES3;
+-    long long PRES4;
+-    long long PRES5;
+-    long long PRES6;
+-    long long PRES7;
+-    long long PRES8;
+ */
+ 
+ long long constantsList[][25] = {
+@@ -1430,8 +1403,7 @@ long long constantsList[][25] = {
+ 61,
+ 67,
+ 1175454080609790,
+-222583764929820,
+-63538058411340,
++349659881752500,
+ 274272618808951,
+ 391818026869930,
+ 470181632243916,
+@@ -1441,6 +1413,6 @@ long long constantsList[][25] = {
+ 931491912936060,
+ 617611466083110,
+ 501013214686140,
+-385969996618140}
++385969996618140},
+ };
+ 
+diff --git a/AP28_kp_q Files/IF_463.H b/AP28_kp_q Files/IF_463.H
+new file mode 100644
+index 0000000..c8a9ff4
+--- /dev/null
++++ b/AP28_kp_q Files/IF_463.H	
+@@ -0,0 +1,23 @@
++if(OK337[n%337])
++if(OK347[n%347])
++if(OK349[n%349])
++if(OK353[n%353])
++if(OK359[n%359])
++if(OK367[n%367])
++if(OK373[n%373])
++if(OK379[n%379])
++if(OK383[n%383])
++if(OK389[n%389])
++if(OK397[n%397])
++if(OK401[n%401])
++if(OK409[n%409])
++if(OK419[n%419])
++if(OK421[n%421])
++if(OK431[n%431])
++if(OK433[n%433])
++if(OK439[n%439])
++if(OK443[n%443])
++if(OK449[n%449])
++if(OK457[n%457])
++if(OK461[n%461])
++if(OK463[n%463])
+diff --git a/AP28_kp_q Files/IF_601.H b/AP28_kp_q Files/IF_601.H
+new file mode 100644
+index 0000000..a8ae5e1
+--- /dev/null
++++ b/AP28_kp_q Files/IF_601.H	
+@@ -0,0 +1,43 @@
++if(OK337[n%337])
++if(OK347[n%347])
++if(OK349[n%349])
++if(OK353[n%353])
++if(OK359[n%359])
++if(OK367[n%367])
++if(OK373[n%373])
++if(OK379[n%379])
++if(OK383[n%383])
++if(OK389[n%389])
++if(OK397[n%397])
++if(OK401[n%401])
++if(OK409[n%409])
++if(OK419[n%419])
++if(OK421[n%421])
++if(OK431[n%431])
++if(OK433[n%433])
++if(OK439[n%439])
++if(OK443[n%443])
++if(OK449[n%449])
++if(OK457[n%457])
++if(OK461[n%461])
++if(OK463[n%463])
++if(OK467[n%467])
++if(OK479[n%479])
++if(OK487[n%487])
++if(OK491[n%491])
++if(OK499[n%499])
++if(OK503[n%503])
++if(OK509[n%509])
++if(OK521[n%521])
++if(OK523[n%523])
++if(OK541[n%541])
++if(OK547[n%547])
++if(OK557[n%557])
++if(OK563[n%563])
++if(OK569[n%569])
++if(OK571[n%571])
++if(OK577[n%577])
++if(OK587[n%587])
++if(OK593[n%593])
++if(OK599[n%599])
++if(OK601[n%601])
+diff --git a/AP28_kp_q Files/MAKES_k29.H b/AP28_kp_q Files/MAKES_k29.H
+index 5401dc2..022e125 100644
+--- a/AP28_kp_q Files/MAKES_k29.H	
++++ b/AP28_kp_q Files/MAKES_k29.H	
+@@ -162,6 +162,28 @@ for(j=0;j<523;j++)OK523[j]=1;
+ for(j=498;j<=523;j++)OK523[(j*(STEP%523))%523]=0;
+ for(j=0;j<541;j++)OK541[j]=1;
+ for(j=516;j<=541;j++)OK541[(j*(STEP%541))%541]=0;
++#ifdef SIEVE_STOP_601
++for(j=0;j<547;j++)OK547[j]=1;
++for(j=522;j<=547;j++)OK547[(j*(STEP%547))%547]=0;
++for(j=0;j<557;j++)OK557[j]=1;
++for(j=532;j<=557;j++)OK557[(j*(STEP%557))%557]=0;
++for(j=0;j<563;j++)OK563[j]=1;
++for(j=538;j<=563;j++)OK563[(j*(STEP%563))%563]=0;
++for(j=0;j<569;j++)OK569[j]=1;
++for(j=544;j<=569;j++)OK569[(j*(STEP%569))%569]=0;
++for(j=0;j<571;j++)OK571[j]=1;
++for(j=546;j<=571;j++)OK571[(j*(STEP%571))%571]=0;
++for(j=0;j<577;j++)OK577[j]=1;
++for(j=552;j<=577;j++)OK577[(j*(STEP%577))%577]=0;
++for(j=0;j<587;j++)OK587[j]=1;
++for(j=562;j<=587;j++)OK587[(j*(STEP%587))%587]=0;
++for(j=0;j<593;j++)OK593[j]=1;
++for(j=568;j<=593;j++)OK593[(j*(STEP%593))%593]=0;
++for(j=0;j<599;j++)OK599[j]=1;
++for(j=574;j<=599;j++)OK599[(j*(STEP%599))%599]=0;
++for(j=0;j<601;j++)OK601[j]=1;
++for(j=576;j<=601;j++)OK601[(j*(STEP%601))%601]=0;
++#endif
+ for(j=0;j<67;j++)OKOK67[j]=0;
+ for(j=0;j<67;j++)
+ for(jj=0;jj<64;jj++)
+diff --git a/AP28_kp_q Files/MAKES_k29_31.H b/AP28_kp_q Files/MAKES_k29_31.H
+new file mode 100644
+index 0000000..efec253
+--- /dev/null
++++ b/AP28_kp_q Files/MAKES_k29_31.H	
+@@ -0,0 +1,354 @@
++for(j=0;j<71;j++)OK71[j]=1;
++for(j=52;j<=71;j++)OK71[(j*(STEP%71))%71]=0;
++for(j=0;j<73;j++)OK73[j]=1;
++for(j=54;j<=73;j++)OK73[(j*(STEP%73))%73]=0;
++for(j=0;j<79;j++)OK79[j]=1;
++for(j=60;j<=79;j++)OK79[(j*(STEP%79))%79]=0;
++for(j=0;j<83;j++)OK83[j]=1;
++for(j=64;j<=83;j++)OK83[(j*(STEP%83))%83]=0;
++for(j=0;j<89;j++)OK89[j]=1;
++for(j=70;j<=89;j++)OK89[(j*(STEP%89))%89]=0;
++for(j=0;j<97;j++)OK97[j]=1;
++for(j=78;j<=97;j++)OK97[(j*(STEP%97))%97]=0;
++for(j=0;j<101;j++)OK101[j]=1;
++for(j=82;j<=101;j++)OK101[(j*(STEP%101))%101]=0;
++for(j=0;j<103;j++)OK103[j]=1;
++for(j=84;j<=103;j++)OK103[(j*(STEP%103))%103]=0;
++for(j=0;j<107;j++)OK107[j]=1;
++for(j=88;j<=107;j++)OK107[(j*(STEP%107))%107]=0;
++for(j=0;j<109;j++)OK109[j]=1;
++for(j=90;j<=109;j++)OK109[(j*(STEP%109))%109]=0;
++for(j=0;j<113;j++)OK113[j]=1;
++for(j=94;j<=113;j++)OK113[(j*(STEP%113))%113]=0;
++for(j=0;j<127;j++)OK127[j]=1;
++for(j=108;j<=127;j++)OK127[(j*(STEP%127))%127]=0;
++for(j=0;j<131;j++)OK131[j]=1;
++for(j=112;j<=131;j++)OK131[(j*(STEP%131))%131]=0;
++for(j=0;j<137;j++)OK137[j]=1;
++for(j=118;j<=137;j++)OK137[(j*(STEP%137))%137]=0;
++for(j=0;j<139;j++)OK139[j]=1;
++for(j=120;j<=139;j++)OK139[(j*(STEP%139))%139]=0;
++for(j=0;j<149;j++)OK149[j]=1;
++for(j=130;j<=149;j++)OK149[(j*(STEP%149))%149]=0;
++for(j=0;j<151;j++)OK151[j]=1;
++for(j=132;j<=151;j++)OK151[(j*(STEP%151))%151]=0;
++for(j=0;j<157;j++)OK157[j]=1;
++for(j=138;j<=157;j++)OK157[(j*(STEP%157))%157]=0;
++for(j=0;j<163;j++)OK163[j]=1;
++for(j=144;j<=163;j++)OK163[(j*(STEP%163))%163]=0;
++for(j=0;j<167;j++)OK167[j]=1;
++for(j=148;j<=167;j++)OK167[(j*(STEP%167))%167]=0;
++for(j=0;j<173;j++)OK173[j]=1;
++for(j=154;j<=173;j++)OK173[(j*(STEP%173))%173]=0;
++for(j=0;j<179;j++)OK179[j]=1;
++for(j=160;j<=179;j++)OK179[(j*(STEP%179))%179]=0;
++for(j=0;j<181;j++)OK181[j]=1;
++for(j=162;j<=181;j++)OK181[(j*(STEP%181))%181]=0;
++for(j=0;j<191;j++)OK191[j]=1;
++for(j=172;j<=191;j++)OK191[(j*(STEP%191))%191]=0;
++for(j=0;j<193;j++)OK193[j]=1;
++for(j=174;j<=193;j++)OK193[(j*(STEP%193))%193]=0;
++for(j=0;j<197;j++)OK197[j]=1;
++for(j=178;j<=197;j++)OK197[(j*(STEP%197))%197]=0;
++for(j=0;j<199;j++)OK199[j]=1;
++for(j=180;j<=199;j++)OK199[(j*(STEP%199))%199]=0;
++for(j=0;j<211;j++)OK211[j]=1;
++for(j=192;j<=211;j++)OK211[(j*(STEP%211))%211]=0;
++for(j=0;j<223;j++)OK223[j]=1;
++for(j=204;j<=223;j++)OK223[(j*(STEP%223))%223]=0;
++for(j=0;j<227;j++)OK227[j]=1;
++for(j=208;j<=227;j++)OK227[(j*(STEP%227))%227]=0;
++for(j=0;j<229;j++)OK229[j]=1;
++for(j=210;j<=229;j++)OK229[(j*(STEP%229))%229]=0;
++for(j=0;j<233;j++)OK233[j]=1;
++for(j=214;j<=233;j++)OK233[(j*(STEP%233))%233]=0;
++for(j=0;j<239;j++)OK239[j]=1;
++for(j=220;j<=239;j++)OK239[(j*(STEP%239))%239]=0;
++for(j=0;j<241;j++)OK241[j]=1;
++for(j=222;j<=241;j++)OK241[(j*(STEP%241))%241]=0;
++for(j=0;j<251;j++)OK251[j]=1;
++for(j=232;j<=251;j++)OK251[(j*(STEP%251))%251]=0;
++for(j=0;j<257;j++)OK257[j]=1;
++for(j=238;j<=257;j++)OK257[(j*(STEP%257))%257]=0;
++for(j=0;j<263;j++)OK263[j]=1;
++for(j=244;j<=263;j++)OK263[(j*(STEP%263))%263]=0;
++for(j=0;j<269;j++)OK269[j]=1;
++for(j=250;j<=269;j++)OK269[(j*(STEP%269))%269]=0;
++for(j=0;j<271;j++)OK271[j]=1;
++for(j=252;j<=271;j++)OK271[(j*(STEP%271))%271]=0;
++for(j=0;j<277;j++)OK277[j]=1;
++for(j=258;j<=277;j++)OK277[(j*(STEP%277))%277]=0;
++for(j=0;j<281;j++)OK281[j]=1;
++for(j=262;j<=281;j++)OK281[(j*(STEP%281))%281]=0;
++for(j=0;j<283;j++)OK283[j]=1;
++for(j=264;j<=283;j++)OK283[(j*(STEP%283))%283]=0;
++for(j=0;j<293;j++)OK293[j]=1;
++for(j=274;j<=293;j++)OK293[(j*(STEP%293))%293]=0;
++for(j=0;j<307;j++)OK307[j]=1;
++for(j=288;j<=307;j++)OK307[(j*(STEP%307))%307]=0;
++for(j=0;j<311;j++)OK311[j]=1;
++for(j=292;j<=311;j++)OK311[(j*(STEP%311))%311]=0;
++for(j=0;j<313;j++)OK313[j]=1;
++for(j=294;j<=313;j++)OK313[(j*(STEP%313))%313]=0;
++for(j=0;j<317;j++)OK317[j]=1;
++for(j=298;j<=317;j++)OK317[(j*(STEP%317))%317]=0;
++for(j=0;j<331;j++)OK331[j]=1;
++for(j=312;j<=331;j++)OK331[(j*(STEP%331))%331]=0;
++for(j=0;j<337;j++)OK337[j]=1;
++for(j=318;j<=337;j++)OK337[(j*(STEP%337))%337]=0;
++for(j=0;j<347;j++)OK347[j]=1;
++for(j=328;j<=347;j++)OK347[(j*(STEP%347))%347]=0;
++for(j=0;j<349;j++)OK349[j]=1;
++for(j=330;j<=349;j++)OK349[(j*(STEP%349))%349]=0;
++for(j=0;j<353;j++)OK353[j]=1;
++for(j=334;j<=353;j++)OK353[(j*(STEP%353))%353]=0;
++for(j=0;j<359;j++)OK359[j]=1;
++for(j=340;j<=359;j++)OK359[(j*(STEP%359))%359]=0;
++for(j=0;j<367;j++)OK367[j]=1;
++for(j=348;j<=367;j++)OK367[(j*(STEP%367))%367]=0;
++for(j=0;j<373;j++)OK373[j]=1;
++for(j=354;j<=373;j++)OK373[(j*(STEP%373))%373]=0;
++for(j=0;j<379;j++)OK379[j]=1;
++for(j=360;j<=379;j++)OK379[(j*(STEP%379))%379]=0;
++for(j=0;j<383;j++)OK383[j]=1;
++for(j=364;j<=383;j++)OK383[(j*(STEP%383))%383]=0;
++for(j=0;j<389;j++)OK389[j]=1;
++for(j=370;j<=389;j++)OK389[(j*(STEP%389))%389]=0;
++for(j=0;j<397;j++)OK397[j]=1;
++for(j=378;j<=397;j++)OK397[(j*(STEP%397))%397]=0;
++for(j=0;j<401;j++)OK401[j]=1;
++for(j=382;j<=401;j++)OK401[(j*(STEP%401))%401]=0;
++for(j=0;j<409;j++)OK409[j]=1;
++for(j=390;j<=409;j++)OK409[(j*(STEP%409))%409]=0;
++for(j=0;j<419;j++)OK419[j]=1;
++for(j=400;j<=419;j++)OK419[(j*(STEP%419))%419]=0;
++for(j=0;j<421;j++)OK421[j]=1;
++for(j=402;j<=421;j++)OK421[(j*(STEP%421))%421]=0;
++for(j=0;j<431;j++)OK431[j]=1;
++for(j=412;j<=431;j++)OK431[(j*(STEP%431))%431]=0;
++for(j=0;j<433;j++)OK433[j]=1;
++for(j=414;j<=433;j++)OK433[(j*(STEP%433))%433]=0;
++for(j=0;j<439;j++)OK439[j]=1;
++for(j=420;j<=439;j++)OK439[(j*(STEP%439))%439]=0;
++for(j=0;j<443;j++)OK443[j]=1;
++for(j=424;j<=443;j++)OK443[(j*(STEP%443))%443]=0;
++for(j=0;j<449;j++)OK449[j]=1;
++for(j=430;j<=449;j++)OK449[(j*(STEP%449))%449]=0;
++for(j=0;j<457;j++)OK457[j]=1;
++for(j=438;j<=457;j++)OK457[(j*(STEP%457))%457]=0;
++for(j=0;j<461;j++)OK461[j]=1;
++for(j=442;j<=461;j++)OK461[(j*(STEP%461))%461]=0;
++for(j=0;j<463;j++)OK463[j]=1;
++for(j=444;j<=463;j++)OK463[(j*(STEP%463))%463]=0;
++for(j=0;j<467;j++)OK467[j]=1;
++for(j=448;j<=467;j++)OK467[(j*(STEP%467))%467]=0;
++for(j=0;j<479;j++)OK479[j]=1;
++for(j=460;j<=479;j++)OK479[(j*(STEP%479))%479]=0;
++for(j=0;j<487;j++)OK487[j]=1;
++for(j=468;j<=487;j++)OK487[(j*(STEP%487))%487]=0;
++for(j=0;j<491;j++)OK491[j]=1;
++for(j=472;j<=491;j++)OK491[(j*(STEP%491))%491]=0;
++for(j=0;j<499;j++)OK499[j]=1;
++for(j=480;j<=499;j++)OK499[(j*(STEP%499))%499]=0;
++for(j=0;j<503;j++)OK503[j]=1;
++for(j=484;j<=503;j++)OK503[(j*(STEP%503))%503]=0;
++for(j=0;j<509;j++)OK509[j]=1;
++for(j=490;j<=509;j++)OK509[(j*(STEP%509))%509]=0;
++for(j=0;j<521;j++)OK521[j]=1;
++for(j=502;j<=521;j++)OK521[(j*(STEP%521))%521]=0;
++for(j=0;j<523;j++)OK523[j]=1;
++for(j=504;j<=523;j++)OK523[(j*(STEP%523))%523]=0;
++for(j=0;j<541;j++)OK541[j]=1;
++for(j=522;j<=541;j++)OK541[(j*(STEP%541))%541]=0;
++for(j=0;j<71;j++)OKOK71[j]=0;
++for(j=0;j<71;j++)
++for(jj=0;jj<64;jj++)
++OKOK71[j]|=(((long long)OK71[(j+(jj+SHIFT)*MOD)%71])<<jj);
++for(j=0;j<73;j++)OKOK73[j]=0;
++for(j=0;j<73;j++)
++for(jj=0;jj<64;jj++)
++OKOK73[j]|=(((long long)OK73[(j+(jj+SHIFT)*MOD)%73])<<jj);
++for(j=0;j<79;j++)OKOK79[j]=0;
++for(j=0;j<79;j++)
++for(jj=0;jj<64;jj++)
++OKOK79[j]|=(((long long)OK79[(j+(jj+SHIFT)*MOD)%79])<<jj);
++for(j=0;j<83;j++)OKOK83[j]=0;
++for(j=0;j<83;j++)
++for(jj=0;jj<64;jj++)
++OKOK83[j]|=(((long long)OK83[(j+(jj+SHIFT)*MOD)%83])<<jj);
++for(j=0;j<89;j++)OKOK89[j]=0;
++for(j=0;j<89;j++)
++for(jj=0;jj<64;jj++)
++OKOK89[j]|=(((long long)OK89[(j+(jj+SHIFT)*MOD)%89])<<jj);
++for(j=0;j<97;j++)OKOK97[j]=0;
++for(j=0;j<97;j++)
++for(jj=0;jj<64;jj++)
++OKOK97[j]|=(((long long)OK97[(j+(jj+SHIFT)*MOD)%97])<<jj);
++for(j=0;j<101;j++)OKOK101[j]=0;
++for(j=0;j<101;j++)
++for(jj=0;jj<64;jj++)
++OKOK101[j]|=(((long long)OK101[(j+(jj+SHIFT)*MOD)%101])<<jj);
++for(j=0;j<103;j++)OKOK103[j]=0;
++for(j=0;j<103;j++)
++for(jj=0;jj<64;jj++)
++OKOK103[j]|=(((long long)OK103[(j+(jj+SHIFT)*MOD)%103])<<jj);
++for(j=0;j<107;j++)OKOK107[j]=0;
++for(j=0;j<107;j++)
++for(jj=0;jj<64;jj++)
++OKOK107[j]|=(((long long)OK107[(j+(jj+SHIFT)*MOD)%107])<<jj);
++for(j=0;j<109;j++)OKOK109[j]=0;
++for(j=0;j<109;j++)
++for(jj=0;jj<64;jj++)
++OKOK109[j]|=(((long long)OK109[(j+(jj+SHIFT)*MOD)%109])<<jj);
++for(j=0;j<113;j++)OKOK113[j]=0;
++for(j=0;j<113;j++)
++for(jj=0;jj<64;jj++)
++OKOK113[j]|=(((long long)OK113[(j+(jj+SHIFT)*MOD)%113])<<jj);
++for(j=0;j<127;j++)OKOK127[j]=0;
++for(j=0;j<127;j++)
++for(jj=0;jj<64;jj++)
++OKOK127[j]|=(((long long)OK127[(j+(jj+SHIFT)*MOD)%127])<<jj);
++for(j=0;j<131;j++)OKOK131[j]=0;
++for(j=0;j<131;j++)
++for(jj=0;jj<64;jj++)
++OKOK131[j]|=(((long long)OK131[(j+(jj+SHIFT)*MOD)%131])<<jj);
++for(j=0;j<137;j++)OKOK137[j]=0;
++for(j=0;j<137;j++)
++for(jj=0;jj<64;jj++)
++OKOK137[j]|=(((long long)OK137[(j+(jj+SHIFT)*MOD)%137])<<jj);
++for(j=0;j<139;j++)OKOK139[j]=0;
++for(j=0;j<139;j++)
++for(jj=0;jj<64;jj++)
++OKOK139[j]|=(((long long)OK139[(j+(jj+SHIFT)*MOD)%139])<<jj);
++for(j=0;j<149;j++)OKOK149[j]=0;
++for(j=0;j<149;j++)
++for(jj=0;jj<64;jj++)
++OKOK149[j]|=(((long long)OK149[(j+(jj+SHIFT)*MOD)%149])<<jj);
++for(j=0;j<151;j++)OKOK151[j]=0;
++for(j=0;j<151;j++)
++for(jj=0;jj<64;jj++)
++OKOK151[j]|=(((long long)OK151[(j+(jj+SHIFT)*MOD)%151])<<jj);
++for(j=0;j<157;j++)OKOK157[j]=0;
++for(j=0;j<157;j++)
++for(jj=0;jj<64;jj++)
++OKOK157[j]|=(((long long)OK157[(j+(jj+SHIFT)*MOD)%157])<<jj);
++for(j=0;j<163;j++)OKOK163[j]=0;
++for(j=0;j<163;j++)
++for(jj=0;jj<64;jj++)
++OKOK163[j]|=(((long long)OK163[(j+(jj+SHIFT)*MOD)%163])<<jj);
++for(j=0;j<167;j++)OKOK167[j]=0;
++for(j=0;j<167;j++)
++for(jj=0;jj<64;jj++)
++OKOK167[j]|=(((long long)OK167[(j+(jj+SHIFT)*MOD)%167])<<jj);
++for(j=0;j<173;j++)OKOK173[j]=0;
++for(j=0;j<173;j++)
++for(jj=0;jj<64;jj++)
++OKOK173[j]|=(((long long)OK173[(j+(jj+SHIFT)*MOD)%173])<<jj);
++for(j=0;j<179;j++)OKOK179[j]=0;
++for(j=0;j<179;j++)
++for(jj=0;jj<64;jj++)
++OKOK179[j]|=(((long long)OK179[(j+(jj+SHIFT)*MOD)%179])<<jj);
++for(j=0;j<181;j++)OKOK181[j]=0;
++for(j=0;j<181;j++)
++for(jj=0;jj<64;jj++)
++OKOK181[j]|=(((long long)OK181[(j+(jj+SHIFT)*MOD)%181])<<jj);
++for(j=0;j<191;j++)OKOK191[j]=0;
++for(j=0;j<191;j++)
++for(jj=0;jj<64;jj++)
++OKOK191[j]|=(((long long)OK191[(j+(jj+SHIFT)*MOD)%191])<<jj);
++for(j=0;j<193;j++)OKOK193[j]=0;
++for(j=0;j<193;j++)
++for(jj=0;jj<64;jj++)
++OKOK193[j]|=(((long long)OK193[(j+(jj+SHIFT)*MOD)%193])<<jj);
++for(j=0;j<197;j++)OKOK197[j]=0;
++for(j=0;j<197;j++)
++for(jj=0;jj<64;jj++)
++OKOK197[j]|=(((long long)OK197[(j+(jj+SHIFT)*MOD)%197])<<jj);
++for(j=0;j<199;j++)OKOK199[j]=0;
++for(j=0;j<199;j++)
++for(jj=0;jj<64;jj++)
++OKOK199[j]|=(((long long)OK199[(j+(jj+SHIFT)*MOD)%199])<<jj);
++for(j=0;j<211;j++)OKOK211[j]=0;
++for(j=0;j<211;j++)
++for(jj=0;jj<64;jj++)
++OKOK211[j]|=(((long long)OK211[(j+(jj+SHIFT)*MOD)%211])<<jj);
++for(j=0;j<223;j++)OKOK223[j]=0;
++for(j=0;j<223;j++)
++for(jj=0;jj<64;jj++)
++OKOK223[j]|=(((long long)OK223[(j+(jj+SHIFT)*MOD)%223])<<jj);
++for(j=0;j<227;j++)OKOK227[j]=0;
++for(j=0;j<227;j++)
++for(jj=0;jj<64;jj++)
++OKOK227[j]|=(((long long)OK227[(j+(jj+SHIFT)*MOD)%227])<<jj);
++for(j=0;j<229;j++)OKOK229[j]=0;
++for(j=0;j<229;j++)
++for(jj=0;jj<64;jj++)
++OKOK229[j]|=(((long long)OK229[(j+(jj+SHIFT)*MOD)%229])<<jj);
++for(j=0;j<233;j++)OKOK233[j]=0;
++for(j=0;j<233;j++)
++for(jj=0;jj<64;jj++)
++OKOK233[j]|=(((long long)OK233[(j+(jj+SHIFT)*MOD)%233])<<jj);
++for(j=0;j<239;j++)OKOK239[j]=0;
++for(j=0;j<239;j++)
++for(jj=0;jj<64;jj++)
++OKOK239[j]|=(((long long)OK239[(j+(jj+SHIFT)*MOD)%239])<<jj);
++for(j=0;j<241;j++)OKOK241[j]=0;
++for(j=0;j<241;j++)
++for(jj=0;jj<64;jj++)
++OKOK241[j]|=(((long long)OK241[(j+(jj+SHIFT)*MOD)%241])<<jj);
++for(j=0;j<251;j++)OKOK251[j]=0;
++for(j=0;j<251;j++)
++for(jj=0;jj<64;jj++)
++OKOK251[j]|=(((long long)OK251[(j+(jj+SHIFT)*MOD)%251])<<jj);
++for(j=0;j<257;j++)OKOK257[j]=0;
++for(j=0;j<257;j++)
++for(jj=0;jj<64;jj++)
++OKOK257[j]|=(((long long)OK257[(j+(jj+SHIFT)*MOD)%257])<<jj);
++for(j=0;j<263;j++)OKOK263[j]=0;
++for(j=0;j<263;j++)
++for(jj=0;jj<64;jj++)
++OKOK263[j]|=(((long long)OK263[(j+(jj+SHIFT)*MOD)%263])<<jj);
++for(j=0;j<269;j++)OKOK269[j]=0;
++for(j=0;j<269;j++)
++for(jj=0;jj<64;jj++)
++OKOK269[j]|=(((long long)OK269[(j+(jj+SHIFT)*MOD)%269])<<jj);
++for(j=0;j<271;j++)OKOK271[j]=0;
++for(j=0;j<271;j++)
++for(jj=0;jj<64;jj++)
++OKOK271[j]|=(((long long)OK271[(j+(jj+SHIFT)*MOD)%271])<<jj);
++for(j=0;j<277;j++)OKOK277[j]=0;
++for(j=0;j<277;j++)
++for(jj=0;jj<64;jj++)
++OKOK277[j]|=(((long long)OK277[(j+(jj+SHIFT)*MOD)%277])<<jj);
++for(j=0;j<281;j++)OKOK281[j]=0;
++for(j=0;j<281;j++)
++for(jj=0;jj<64;jj++)
++OKOK281[j]|=(((long long)OK281[(j+(jj+SHIFT)*MOD)%281])<<jj);
++for(j=0;j<283;j++)OKOK283[j]=0;
++for(j=0;j<283;j++)
++for(jj=0;jj<64;jj++)
++OKOK283[j]|=(((long long)OK283[(j+(jj+SHIFT)*MOD)%283])<<jj);
++for(j=0;j<293;j++)OKOK293[j]=0;
++for(j=0;j<293;j++)
++for(jj=0;jj<64;jj++)
++OKOK293[j]|=(((long long)OK293[(j+(jj+SHIFT)*MOD)%293])<<jj);
++for(j=0;j<307;j++)OKOK307[j]=0;
++for(j=0;j<307;j++)
++for(jj=0;jj<64;jj++)
++OKOK307[j]|=(((long long)OK307[(j+(jj+SHIFT)*MOD)%307])<<jj);
++for(j=0;j<311;j++)OKOK311[j]=0;
++for(j=0;j<311;j++)
++for(jj=0;jj<64;jj++)
++OKOK311[j]|=(((long long)OK311[(j+(jj+SHIFT)*MOD)%311])<<jj);
++for(j=0;j<313;j++)OKOK313[j]=0;
++for(j=0;j<313;j++)
++for(jj=0;jj<64;jj++)
++OKOK313[j]|=(((long long)OK313[(j+(jj+SHIFT)*MOD)%313])<<jj);
++for(j=0;j<317;j++)OKOK317[j]=0;
++for(j=0;j<317;j++)
++for(jj=0;jj<64;jj++)
++OKOK317[j]|=(((long long)OK317[(j+(jj+SHIFT)*MOD)%317])<<jj);
++for(j=0;j<331;j++)OKOK331[j]=0;
++for(j=0;j<331;j++)
++for(jj=0;jj<64;jj++)
++OKOK331[j]|=(((long long)OK331[(j+(jj+SHIFT)*MOD)%331])<<jj);
+diff --git a/AP28_kp_q Files/result_k29_41_special31.txt b/AP28_kp_q Files/result_k29_41_special31.txt
+new file mode 100644
+index 0000000..484655e
+--- /dev/null
++++ b/AP28_kp_q Files/result_k29_41_special31.txt	
+@@ -0,0 +1,7 @@
++14 1 35874836420898509
++14 1 877789953625829
++16 1 8107911309532679
++16 1 1564632324714131
++14 1 31615546387430641
++14 1 28196693515933559
++TIME: 689431418 microseconds
