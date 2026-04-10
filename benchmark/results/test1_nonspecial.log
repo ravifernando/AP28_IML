@@ -1,0 +1,27 @@
+# T1a: k29_31 non-special  |  K=[1..6] SHIFT=0 extraPrimes=899 special=0
+# Format: AP_Length  K  FirstTerm
+# -----------------------------------------------
+14 2 14972673602809333
+14 3 154481889303373
+15 5 22993861658262689
+15 6 1657704558204619
+# === Benchmark: K=[1..6], SHIFT=0, extraPrimes=899, special_filter=0 ===
+# K=1  TIME: 333647657 us
+# K=2  TIME: 364662382 us
+# K=3  TIME: 361401557 us
+# K=4  TIME: 363977333 us
+# K=5  TIME: 314201429 us
+# K=6  TIME: 356350130 us
+# === Total: 2094240644 us  (2094.241 s) ===
+14 2 14972673602809333
+14 3 154481889303373
+15 5 22993861658262689
+15 6 1657704558204619
+# === Benchmark: K=[1..6], SHIFT=0, extraPrimes=899, special_filter=0 ===
+# K=1  TIME: 325513285 us
+# K=2  TIME: 362865471 us
+# K=3  TIME: 363034111 us
+# K=4  TIME: 365822544 us
+# K=5  TIME: 315184476 us
+# K=6  TIME: 357064058 us
+# === Total: 2089484092 us  (2089.484 s) ===

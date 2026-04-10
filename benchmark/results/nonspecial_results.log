@@ -1,0 +1,72 @@
+# Non-special(59*61)  |  K=[1..20] SHIFT=0 extraPrimes=3599
+# Format: AP_Length  K  FirstTerm
+# -----------------------------------------------
+14 19 7337114743639679
+# === Benchmark: K=[1..20], SHIFT=0, extraPrimes=3599 ===
+# K=1  TIME: 13977057 us
+# K=2  TIME: 15342915 us
+# K=3  TIME: 13201372 us
+# K=4  TIME: 15385191 us
+# K=5  TIME: 14866219 us
+# K=6  TIME: 13904582 us
+# K=7  TIME: 14957389 us
+# K=8  TIME: 15278070 us
+# K=9  TIME: 14752717 us
+# K=10  TIME: 14752883 us
+# K=11  TIME: 13160932 us
+# K=12  TIME: 15152099 us
+# K=13  TIME: 14782285 us
+# K=14  TIME: 13906590 us
+# K=15  TIME: 14859273 us
+# K=16  TIME: 14661613 us
+# K=17  TIME: 14619073 us
+# K=18  TIME: 14832808 us
+# K=19  TIME: 13043136 us
+# K=20  TIME: 15161249 us
+# === Total: 290599402 us  (290.599 s) ===
+14 19 7337114743639679
+# === Benchmark: K=[1..20], SHIFT=0, extraPrimes=3599 ===
+# K=1  TIME: 14912837 us
+# K=2  TIME: 14821153 us
+# K=3  TIME: 13222454 us
+# K=4  TIME: 15201835 us
+# K=5  TIME: 14709498 us
+# K=6  TIME: 13939509 us
+# K=7  TIME: 14985260 us
+# K=8  TIME: 14700345 us
+# K=9  TIME: 14734514 us
+# K=10  TIME: 14801108 us
+# K=11  TIME: 13197980 us
+# K=12  TIME: 15529411 us
+# K=13  TIME: 14981293 us
+# K=14  TIME: 13944006 us
+# K=15  TIME: 14957152 us
+# K=16  TIME: 14695350 us
+# K=17  TIME: 14668277 us
+# K=18  TIME: 14871909 us
+# K=19  TIME: 13041645 us
+# K=20  TIME: 15157869 us
+# === Total: 291074060 us  (291.074 s) ===
+14 19 7337114743639679
+# === Benchmark: K=[1..20], SHIFT=0, extraPrimes=3599 ===
+# K=1  TIME: 14903174 us
+# K=2  TIME: 14822991 us
+# K=3  TIME: 13211182 us
+# K=4  TIME: 15219597 us
+# K=5  TIME: 14700004 us
+# K=6  TIME: 13929556 us
+# K=7  TIME: 15006179 us
+# K=8  TIME: 14691676 us
+# K=9  TIME: 14717283 us
+# K=10  TIME: 14798826 us
+# K=11  TIME: 13161027 us
+# K=12  TIME: 15213641 us
+# K=13  TIME: 14798994 us
+# K=14  TIME: 13896552 us
+# K=15  TIME: 14936449 us
+# K=16  TIME: 14709914 us
+# K=17  TIME: 14639397 us
+# K=18  TIME: 14862906 us
+# K=19  TIME: 13020469 us
+# K=20  TIME: 15162786 us
+# === Total: 290403048 us  (290.403 s) ===
