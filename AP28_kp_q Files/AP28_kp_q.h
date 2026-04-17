@@ -1,8 +1,12 @@
 #include <stdio.h>
+#include "../abmod.h"
 
 void SearchAP28_kp_q(int K, int SHIFT, int extraPrimes)
 {
 
+long long dbg_primeq_reached = 0;
+int dbg_max_k_up = 0;
+int dbg_max_k_total = 0;
 long long n, n43, n47, n53, n59, n61; // Added n61 due to there being more inner loops (more additions)
 int iPRIME4, iPRIME5, iPRIME6, iPRIME7, iPRIME8;
 int i3, i5, iPRIME1, iPRIME2, iPRIME3;
@@ -10,11 +14,11 @@ int i3, i5, iPRIME1, iPRIME2, iPRIME3;
 int constantsIndex = 0;
 for (int i = 0; i < sizeof(constantsList) / sizeof(constantsList[0][0]); i++) {
     if (constantsList[i][0] == extraPrimes) {
-        if (constantsList[i][0] == 29 && constantsList[i][2] == 0) continue;
+        if (constantsList[i][0] == 29 && constantsList[i][1] == 0 && constantsList[i][2] == 0) continue;
         constantsIndex = i;
         break;
     } else if (constantsList[i][0] * constantsList[i][1] == extraPrimes) {
-        if (constantsList[i][0] == 29 && constantsList[i][2] == 0) continue;
+        if (constantsList[i][0] == 29 && constantsList[i][1] == 0 && constantsList[i][2] == 0) continue;
         constantsIndex = i;
         break;
     }
@@ -27,6 +31,7 @@ int special = constantsList[constantsIndex][2];
 int i, j, jj;
 
 long long STEP;
+long long STEP7;
 long long STEP8;
 long long STEP9;
 long long n0;
@@ -334,12 +339,14 @@ if(q == 0 || n % q) // Added this if statement to reflect sieving mod q
 long long m;
 int k;
 
+dbg_primeq_reached++;
 k=0; m=n+STEP9;
 while(PrimeQ(m)){
 k++;
 m+=STEP;
 };
 
+if(k > dbg_max_k_up) dbg_max_k_up = k;
 
 if(k>=10){
 m=n+STEP8;
@@ -349,7 +356,7 @@ m-=STEP;
 };
 };
 
-
+if(k > dbg_max_k_total) dbg_max_k_total = k;
 
 if(k>=10)
 {
@@ -614,8 +621,8 @@ long long OKOK317[317];
 long long OKOK331[331];
 
 STEP=K*COMMONDIFF; // Changed to PRIM29, since we are now working with 29#
+STEP7=STEP*7;
 STEP8=STEP*8;
-STEP9=STEP*9;
 
 n0=(abmodm(N0, K, MOD)+N30)%MOD;
 SPRIME1=abmodm(PRES2, K, MOD);
@@ -649,11 +656,11 @@ m97=MOD%97;
 
 for(iPRIME1=0;iPRIME1<(PRIME1-26);++iPRIME1)
 for(iPRIME2=0;iPRIME2<(PRIME2-26);++iPRIME2)
-if(iPRIME2-iPRIME1<=PRIME1-27&&iPRIME1-iPRIME2<=special-27)
+if(iPRIME2-iPRIME1<=PRIME2-27&&iPRIME1-iPRIME2<=PRIME1-27)
 for(iPRIME3=0;iPRIME3<(PRIME3-26);++iPRIME3)
-if(iPRIME3-iPRIME1<=PRIME2-27&&iPRIME3-iPRIME2<=PRIME2-27&&iPRIME1-iPRIME3<=special-27&&iPRIME2-iPRIME3<=PRIME1-27)
+if(iPRIME3-iPRIME1<=PRIME3-27&&iPRIME3-iPRIME2<=PRIME3-27&&iPRIME1-iPRIME3<=PRIME1-27&&iPRIME2-iPRIME3<=PRIME2-27)
 for(iPRIME4=0;iPRIME4<(PRIME4-26);++iPRIME4)
-if(iPRIME4-iPRIME1<=PRIME3-27&&iPRIME4-iPRIME2<=PRIME3-27&&iPRIME4-iPRIME3<=PRIME3-27&&iPRIME1-iPRIME4<=special-27&&iPRIME2-iPRIME4<=PRIME1-27&&iPRIME3-iPRIME4<=PRIME2-27)
+if(iPRIME4-iPRIME1<=PRIME4-27&&iPRIME4-iPRIME2<=PRIME4-27&&iPRIME4-iPRIME3<=PRIME4-27&&iPRIME1-iPRIME4<=PRIME1-27&&iPRIME2-iPRIME4<=PRIME2-27&&iPRIME3-iPRIME4<=PRIME3-27)
 for(i3=0;i3<2;++i3)
 for(i5=0;i5<4;++i5)
 {
@@ -705,7 +712,7 @@ if(q == 0 || n % q) // Added this if statement to reflect sieving mod q
 long long m;
 int k;
 
-k=0; m=n+STEP9;
+k=0; m=n+STEP8;
 while(PrimeQ(m)){
 k++;
 m+=STEP;
@@ -713,7 +720,7 @@ m+=STEP;
 
 
 if(k>=10){
-m=n+STEP8;
+m=n+STEP7;
 while(m>0&&PrimeQ(m)){
 k++;
 m-=STEP;
@@ -981,8 +988,8 @@ long long OKOK317[317];
 long long OKOK331[331];
 
 STEP=K*COMMONDIFF; // Changed to PRIM29, since we are now working with 29#
+STEP7=STEP*7;
 STEP8=STEP*8;
-STEP9=STEP*9;
 
 SPRIME1=abmodm(PRES2, K, MOD);
 SPRIME2=abmodm(PRES3, K, MOD);
@@ -1015,11 +1022,11 @@ m97=MOD%97;
 
 for(iPRIME1=0;iPRIME1<(PRIME1-26);++iPRIME1)
 for(iPRIME2=0;iPRIME2<(PRIME2-26);++iPRIME2)
-if(iPRIME2-iPRIME1<=PRIME1-27&&iPRIME1-iPRIME2<=special-27)
+if(iPRIME2-iPRIME1<=PRIME2-27&&iPRIME1-iPRIME2<=PRIME1-27)
 for(iPRIME3=0;iPRIME3<(PRIME3-26);++iPRIME3)
-if(iPRIME3-iPRIME1<=PRIME2-27&&iPRIME3-iPRIME2<=PRIME2-27&&iPRIME1-iPRIME3<=special-27&&iPRIME2-iPRIME3<=PRIME1-27)
+if(iPRIME3-iPRIME1<=PRIME3-27&&iPRIME3-iPRIME2<=PRIME3-27&&iPRIME1-iPRIME3<=PRIME1-27&&iPRIME2-iPRIME3<=PRIME2-27)
 for(iPRIME4=0;iPRIME4<(PRIME4-26);++iPRIME4)
-if(iPRIME4-iPRIME1<=PRIME3-27&&iPRIME4-iPRIME2<=PRIME3-27&&iPRIME4-iPRIME3<=PRIME3-27&&iPRIME1-iPRIME4<=special-27&&iPRIME2-iPRIME4<=PRIME1-27&&iPRIME3-iPRIME4<=PRIME2-27)
+if(iPRIME4-iPRIME1<=PRIME4-27&&iPRIME4-iPRIME2<=PRIME4-27&&iPRIME4-iPRIME3<=PRIME4-27&&iPRIME1-iPRIME4<=PRIME1-27&&iPRIME2-iPRIME4<=PRIME2-27&&iPRIME3-iPRIME4<=PRIME3-27)
 for(i3=0;i3<2;++i3)
 for(i5=0;i5<4;++i5)
 for(i=0;i<3;++i)
@@ -1074,7 +1081,7 @@ if(q == 0 || n % q) // Added this if statement to reflect sieving mod q
 long long m;
 int k;
 
-k=0; m=n+STEP9;
+k=0; m=n+STEP8;
 while(PrimeQ(m)){
 k++;
 m+=STEP;
@@ -1082,7 +1089,7 @@ m+=STEP;
 
 
 if(k>=10){
-m=n+STEP8;
+m=n+STEP7;
 while(m>0&&PrimeQ(m)){
 k++;
 m-=STEP;
@@ -1155,8 +1162,9 @@ if(n53>=MOD)n53-=MOD;
 }
 }
 }
+
+printf("[KPQ DEBUG] K=%d extraPrimes=%d: candidates reaching PrimeQ: %lld, max_k_up: %d, max_k_total: %d\n",
+       K, extraPrimes, dbg_primeq_reached, dbg_max_k_up, dbg_max_k_total);
 }
-
-
 
 
