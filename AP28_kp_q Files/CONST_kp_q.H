@@ -52,6 +52,33 @@ For reference of each element (that corresponds to a special prime search):
     long long PRES6;
     long long PRES7;
     long long PRES8;
+
+For reference of each element (that corresponds to the k29_31 with 37 semi-special prime search):
+
+    int p;
+    int q;
+    int special;
+    long long COMMONDIFF;
+    int PRIME1;
+    int PRIME2;
+    int PRIME3;
+    int PRIME4;
+    int PRIME5;
+    int PRIME6;
+    int PRIME7;
+    long long MOD;
+    long long N0;
+    long long N0INC;
+    long long N30;
+    long long S3;
+    long long S5;
+    long long PRES2;
+    long long PRES3;
+    long long PRES4;
+    long long PRES5;
+    long long PRES6;
+    long long PRES7;
+    long long PRES8;
 */
 
 long long constantsList[][25] = {
@@ -1403,7 +1430,8 @@ long long constantsList[][25] = {
 61,
 67,
 1175454080609790,
-349659881752500,
+222583764929820,
+63538058411340,
 274272618808951,
 391818026869930,
 470181632243916,

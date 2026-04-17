@@ -11,8 +11,8 @@ int i3, i5, i31, i37, i41;
 int i, j, jj;
 
 long long STEP;
-long long STEP5;
-long long STEP4;
+long long STEP7;
+long long STEP6;
 long long n0;
 long long sito;
 
@@ -37,8 +37,8 @@ if(
 {
 
 STEP=K*PRIM23;
-STEP4=STEP*4;
-STEP5=STEP*5;
+STEP6=STEP*6;
+STEP7=STEP*7;
 n0=(abmodm(N0, K, MOD)+N30)%MOD; // = N0 * K + N30 mod MOD (overflow-safe)
 S31=abmodm(PRES2, K, MOD); // = PRES2 * K mod MOD (overflow-safe)
 S37=abmodm(PRES3, K, MOD);
@@ -132,7 +132,7 @@ long long m;
 int k;
 
 // check for primes
-k=0; m=n+STEP5;
+k=0; m=n+STEP7;
 while(PrimeQ(m)){
 k++;
 m+=STEP;
@@ -140,7 +140,7 @@ m+=STEP;
 
 
 if(k>=10){
-m=n+STEP4;
+m=n+STEP6;
 while(m>0&&PrimeQ(m)){
 k++;
 m-=STEP;
