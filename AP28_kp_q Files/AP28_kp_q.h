@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "../abmod.h"
 
 void SearchAP28_kp_q(int K, int SHIFT, int extraPrimes, int specialSearch)
 {
@@ -185,6 +186,16 @@ char OK509[509];
 char OK521[521];
 char OK523[523];
 char OK541[541];
+char OK547[547];
+char OK557[557];
+char OK563[563];
+char OK569[569];
+char OK571[571];
+char OK577[577];
+char OK587[587];
+char OK593[593];
+char OK599[599];
+char OK601[601];
 long long OKOK67[67];
 long long OKOK71[71];
 long long OKOK73[73];
@@ -234,6 +245,7 @@ long long OKOK311[311];
 long long OKOK313[313];
 long long OKOK317[317];
 long long OKOK331[331];
+long long OKOK337[337];
 
 STEP=K*COMMONDIFF; // Changed to COMMONDIFF, since AP28_kp works with various common differences.
 STEP8=STEP*8; // The program starts at sieving n + 8 * STEP and then sieves n + 7 * STEP, n + 6 * STEP, n + 5 * STEP, n + 4 * STEP, ...
@@ -322,7 +334,13 @@ if((sito>>b)&1)
 
 n=n61+(b+SHIFT)*MOD;
 
+#if defined(SIEVE_STOP_463)
+#include "IF_463.H"
+#elif defined(SIEVE_STOP_601)
+#include "IF_601.H"
+#else
 #include "IF.H"
+#endif
 if(n%7) // Sieving for primes from 7 to 23 and p
 if(n%11)
 if(n%13)
@@ -422,7 +440,7 @@ if(n43>=MOD)n43-=MOD;
 }
 }
 }
-else if (q != 31) {
+else {
 
 int PRIME1 = constantsList[constantsIndex][4]; // skipping index 3 is intentional
 int PRIME2 = constantsList[constantsIndex][5];
@@ -564,6 +582,16 @@ char OK509[509];
 char OK521[521];
 char OK523[523];
 char OK541[541];
+char OK547[547];
+char OK557[557];
+char OK563[563];
+char OK569[569];
+char OK571[571];
+char OK577[577];
+char OK587[587];
+char OK593[593];
+char OK599[599];
+char OK601[601];
 long long OKOK67[67];
 long long OKOK71[71];
 long long OKOK73[73];
@@ -613,6 +641,7 @@ long long OKOK311[311];
 long long OKOK313[313];
 long long OKOK317[317];
 long long OKOK331[331];
+long long OKOK337[337];
 
 STEP=K*COMMONDIFF; // Changed to PRIM29, since we are now working with 29#
 STEP7=STEP*7; // The program starts at sieving n + 7 * STEP and then sieves n + 6 * STEP, n + 5 * STEP, n + 4 * STEP, n + 3 * STEP, ...
@@ -650,9 +679,11 @@ m97=MOD%97;
 
 for(iPRIME1=0;iPRIME1<(PRIME1-26);++iPRIME1)
 for(iPRIME2=0;iPRIME2<(PRIME2-26);++iPRIME2)
-if(iPRIME2-iPRIME1<=PRIME2-27&&iPRIME1-iPRIME2<=PRIME1-27)
+if(iPRIME2-iPRIME1<=14&&iPRIME1-iPRIME2<=10)
 for(iPRIME3=0;iPRIME3<(PRIME3-26);++iPRIME3)
-if(iPRIME3-iPRIME1<=PRIME3-27&&iPRIME3-iPRIME2<=PRIME3-27&&iPRIME1-iPRIME3<=PRIME1-27&&iPRIME2-iPRIME3<=PRIME2-27)
+if(iPRIME3-iPRIME1<=16&&iPRIME3-iPRIME2<=16&&iPRIME1-iPRIME3<=10&&iPRIME2-iPRIME3<=14)
+for(iPRIME4=0;iPRIME4<(PRIME4-26);++iPRIME4)
+if(iPRIME4-iPRIME1<=20&&iPRIME4-iPRIME2<=20&&iPRIME4-iPRIME3<=20&&iPRIME1-iPRIME4<=10&&iPRIME2-iPRIME4<=14&&iPRIME3-iPRIME4<=16)
 for(i3=0;i3<2;++i3)
 for(i5=0;i5<4;++i5)
 {
@@ -660,11 +691,9 @@ for(i5=0;i5<4;++i5)
 
 
 
-n47=(n0+i3*S3+i5*S5+iPRIME1*SPRIME1+iPRIME2*SPRIME2+iPRIME3*SPRIME3)%MOD;
+n47=(n0+i3*S3+i5*S5+iPRIME1*SPRIME1+iPRIME2*SPRIME2+iPRIME3*SPRIME3+iPRIME4*SPRIME4)%MOD;
 {
 // Since PRIMES1 to PRIMES8 are changed in CONST_k29.H, they do not need to be removed from the loops.
-for(iPRIME4=(PRIME4-26);iPRIME4>0;iPRIME4--) // Same comment as in line 72, but the bounds are reversed
-{
 
 n53=n47;
 for(iPRIME5=(PRIME5-26);iPRIME5>0;iPRIME5--)
@@ -697,7 +726,13 @@ if((sito>>b)&1)
 
 n=n61+(b+SHIFT)*MOD;
 
+#if defined(SIEVE_STOP_463)
+#include "IF_463.H"
+#elif defined(SIEVE_STOP_601)
+#include "IF_601.H"
+#else
 #include "IF.H"
+#endif
 if(n%7) // Sieving for primes from 7 to 29
 if(n%11)
 if(n%13)
