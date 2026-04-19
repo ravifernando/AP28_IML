@@ -39,6 +39,12 @@ void ReportSolution(int AP_Length,int difference,long long First_Term){
 
 #include "CONST_kp_q.H"
 #include "../abmod.h"
+/*
+laxOrSpecialSearch:
+  Enter 1 for special/semi-special search (for k29_q) or for lax sieving (for p != 29)
+  Enter 0 for no special prime (for k29_q) or for strict sieving (for p != 29)
+*/
+#define laxOrSpecialSearch 1
 #include "AP28_kp_q.h"
 
 
@@ -47,13 +53,7 @@ int main(int argc, char *argv[])
 {
     mytime = microtime();
 
-    /*
-    Third Parameter of SearchAP28_kp_q:
-    - if special search is desired, then enter 1 (note that a special search only happens when working with AP28_k29_q searches)
-    - if normal search is desired, then enter 0
-    */
-
-    SearchAP28_kp_q(1, 0, 29 * 31, 0);
+    SearchAP28_kp_q(5, 0, 59 * 47);
 
     totaltime=microtime()-mytime;
     printf("TIME: %lld microseconds\n",totaltime);
