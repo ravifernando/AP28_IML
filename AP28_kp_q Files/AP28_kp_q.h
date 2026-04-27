@@ -440,7 +440,7 @@ if(n43>=MOD)n43-=MOD;
 }
 }
 }
-else {
+else if( q != 31 ){
 
 int PRIME1 = constantsList[constantsIndex][4]; // skipping index 3 is intentional
 int PRIME2 = constantsList[constantsIndex][5];
