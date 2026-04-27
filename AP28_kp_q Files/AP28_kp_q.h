@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "../abmod.h"
 
-void SearchAP28_kp_q(int K, int SHIFT, int extraPrimes, int specialSearch)
+void SearchAP28_kp_q(int K, int SHIFT, int extraPrimes)
 {
 
 long long n, n43, n47, n53, n59, n61; // Added n61 due to there being more inner loops (more additions)
@@ -11,11 +11,11 @@ int i3, i5, iPRIME1, iPRIME2, iPRIME3;
 int constantsIndex = 0;
 for (int i = 0; i < sizeof(constantsList) / sizeof(constantsList[0][0]); i++) {
     if (constantsList[i][0] == extraPrimes) {
-        if (specialSearch == 1 && constantsList[i][0] == 29 && constantsList[i][2] == 0) continue;
+        if (laxOrSpecialSearch == 1 && constantsList[i][0] == 29 && constantsList[i][2] == 0) continue;
         constantsIndex = i;
         break;
     } else if (constantsList[i][0] * constantsList[i][1] == extraPrimes) {
-        if (specialSearch == 1 && constantsList[i][0] == 29 && constantsList[i][2] == 0) continue;
+        if (laxOrSpecialSearch == 1 && constantsList[i][0] == 29 && constantsList[i][2] == 0) continue;
         constantsIndex = i;
         break;
     }
@@ -65,31 +65,31 @@ long long PRES7 = constantsList[constantsIndex][22];
 long long PRES8 = constantsList[constantsIndex][23];
 long long PRES9 = constantsList[constantsIndex][24];
 
-// printf("p: %d\n", p);
-// printf("q: %d\n", q);
-// printf("special: %d\n", special);
-// printf("COMMONDIFF: %lld\n", COMMONDIFF);
-// printf("PRIME1: %d\n", PRIME1);
-// printf("PRIME2: %d\n", PRIME2);
-// printf("PRIME3: %d\n", PRIME3);
-// printf("PRIME4: %d\n", PRIME4);
-// printf("PRIME5: %d\n", PRIME5);
-// printf("PRIME6: %d\n", PRIME6);
-// printf("PRIME7: %d\n", PRIME7);
-// printf("PRIME8: %d\n", PRIME8);
-// printf("MOD: %lld\n", MOD);
-// printf("N0: %lld\n", N0);
-// printf("N30: %lld\n", N30);
-// printf("S3: %lld\n", S3);
-// printf("S5: %lld\n", S5);
-// printf("PRES2: %lld\n", PRES2);
-// printf("PRES3: %lld\n", PRES3);
-// printf("PRES4: %lld\n", PRES4);
-// printf("PRES5: %lld\n", PRES5);
-// printf("PRES6: %lld\n", PRES6);
-// printf("PRES7: %lld\n", PRES7);
-// printf("PRES8: %lld\n", PRES8);
-// printf("PRES9: %lld\n", PRES9);
+printf("p: %d\n", p);
+printf("q: %d\n", q);
+printf("special: %d\n", special);
+printf("COMMONDIFF: %lld\n", COMMONDIFF);
+printf("PRIME1: %d\n", PRIME1);
+printf("PRIME2: %d\n", PRIME2);
+printf("PRIME3: %d\n", PRIME3);
+printf("PRIME4: %d\n", PRIME4);
+printf("PRIME5: %d\n", PRIME5);
+printf("PRIME6: %d\n", PRIME6);
+printf("PRIME7: %d\n", PRIME7);
+printf("PRIME8: %d\n", PRIME8);
+printf("MOD: %lld\n", MOD);
+printf("N0: %lld\n", N0);
+printf("N30: %lld\n", N30);
+printf("S3: %lld\n", S3);
+printf("S5: %lld\n", S5);
+printf("PRES2: %lld\n", PRES2);
+printf("PRES3: %lld\n", PRES3);
+printf("PRES4: %lld\n", PRES4);
+printf("PRES5: %lld\n", PRES5);
+printf("PRES6: %lld\n", PRES6);
+printf("PRES7: %lld\n", PRES7);
+printf("PRES8: %lld\n", PRES8);
+printf("PRES9: %lld\n", PRES9);
 
 // skip k's that are divisible by PRIME1, ..., or PRIME8 for the sake of simplicity
 if(
@@ -279,7 +279,13 @@ m89=MOD%89;
 m97=MOD%97;
 // m101=MOD%101; // if needed, uncomment
 
+#if !laxOrSpecialSearch
+printf("Running Strict Sieving\n");
 #include "MAKES_kp_q.H"
+#else
+printf("Running Lax Sieving\n");
+#include "MAKES_LAX.H"
+#endif
 
 // Since we want a tighter sieve, I made all bounds be from 0 to (p-28) for the outer loops.
 for(iPRIME1=0;iPRIME1<(PRIME1-28);++iPRIME1)
@@ -464,29 +470,29 @@ long long PRES6 = constantsList[constantsIndex][20];
 long long PRES7 = constantsList[constantsIndex][21];
 long long PRES8 = constantsList[constantsIndex][22];
 
-// printf("p: %d\n", p);
-// printf("q: %d\n", q);
-// printf("special: %d\n", special);
-// printf("COMMONDIFF: %lld\n", COMMONDIFF);
-// printf("PRIME1: %d\n", PRIME1);
-// printf("PRIME2: %d\n", PRIME2);
-// printf("PRIME3: %d\n", PRIME3);
-// printf("PRIME4: %d\n", PRIME4);
-// printf("PRIME5: %d\n", PRIME5);
-// printf("PRIME6: %d\n", PRIME6);
-// printf("PRIME7: %d\n", PRIME7);
-// printf("MOD: %lld\n", MOD);
-// printf("N0: %lld\n", N0);
-// printf("N30: %lld\n", N30);
-// printf("S3: %lld\n", S3);
-// printf("S5: %lld\n", S5);
-// printf("PRES2: %lld\n", PRES2);
-// printf("PRES3: %lld\n", PRES3);
-// printf("PRES4: %lld\n", PRES4);
-// printf("PRES5: %lld\n", PRES5);
-// printf("PRES6: %lld\n", PRES6);
-// printf("PRES7: %lld\n", PRES7);
-// printf("PRES8: %lld\n", PRES8);
+printf("p: %d\n", p);
+printf("q: %d\n", q);
+printf("special: %d\n", special);
+printf("COMMONDIFF: %lld\n", COMMONDIFF);
+printf("PRIME1: %d\n", PRIME1);
+printf("PRIME2: %d\n", PRIME2);
+printf("PRIME3: %d\n", PRIME3);
+printf("PRIME4: %d\n", PRIME4);
+printf("PRIME5: %d\n", PRIME5);
+printf("PRIME6: %d\n", PRIME6);
+printf("PRIME7: %d\n", PRIME7);
+printf("MOD: %lld\n", MOD);
+printf("N0: %lld\n", N0);
+printf("N30: %lld\n", N30);
+printf("S3: %lld\n", S3);
+printf("S5: %lld\n", S5);
+printf("PRES2: %lld\n", PRES2);
+printf("PRES3: %lld\n", PRES3);
+printf("PRES4: %lld\n", PRES4);
+printf("PRES5: %lld\n", PRES5);
+printf("PRES6: %lld\n", PRES6);
+printf("PRES7: %lld\n", PRES7);
+printf("PRES8: %lld\n", PRES8);
 
 if(
 		K%PRIME1&& // No need to change, because I am changing the values in CONST_k29.H
@@ -850,30 +856,30 @@ long long PRES6 = constantsList[constantsIndex][21];
 long long PRES7 = constantsList[constantsIndex][22];
 long long PRES8 = constantsList[constantsIndex][23];
 
-// printf("p: %d\n", p);
-// printf("q: %d\n", q);
-// printf("special: %d\n", special);
-// printf("COMMONDIFF: %lld\n", COMMONDIFF);
-// printf("PRIME1: %d\n", PRIME1);
-// printf("PRIME2: %d\n", PRIME2);
-// printf("PRIME3: %d\n", PRIME3);
-// printf("PRIME4: %d\n", PRIME4);
-// printf("PRIME5: %d\n", PRIME5);
-// printf("PRIME6: %d\n", PRIME6);
-// printf("PRIME7: %d\n", PRIME7);
-// printf("MOD: %lld\n", MOD);
-// printf("N0: %lld\n", N0);
-// printf("N0INC: %lld\n", N0INC);
-// printf("N30: %lld\n", N30);
-// printf("S3: %lld\n", S3);
-// printf("S5: %lld\n", S5);
-// printf("PRES2: %lld\n", PRES2);
-// printf("PRES3: %lld\n", PRES3);
-// printf("PRES4: %lld\n", PRES4);
-// printf("PRES5: %lld\n", PRES5);
-// printf("PRES6: %lld\n", PRES6);
-// printf("PRES7: %lld\n", PRES7);
-// printf("PRES8: %lld\n", PRES8);
+printf("p: %d\n", p);
+printf("q: %d\n", q);
+printf("special: %d\n", special);
+printf("COMMONDIFF: %lld\n", COMMONDIFF);
+printf("PRIME1: %d\n", PRIME1);
+printf("PRIME2: %d\n", PRIME2);
+printf("PRIME3: %d\n", PRIME3);
+printf("PRIME4: %d\n", PRIME4);
+printf("PRIME5: %d\n", PRIME5);
+printf("PRIME6: %d\n", PRIME6);
+printf("PRIME7: %d\n", PRIME7);
+printf("MOD: %lld\n", MOD);
+printf("N0: %lld\n", N0);
+printf("N0INC: %lld\n", N0INC);
+printf("N30: %lld\n", N30);
+printf("S3: %lld\n", S3);
+printf("S5: %lld\n", S5);
+printf("PRES2: %lld\n", PRES2);
+printf("PRES3: %lld\n", PRES3);
+printf("PRES4: %lld\n", PRES4);
+printf("PRES5: %lld\n", PRES5);
+printf("PRES6: %lld\n", PRES6);
+printf("PRES7: %lld\n", PRES7);
+printf("PRES8: %lld\n", PRES8);
 
 if(
 		K%PRIME1&& // No need to change, because I am changing the values in CONST_k29.H
