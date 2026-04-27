@@ -284,19 +284,21 @@ m97=MOD%97;
 // Since we want a tighter sieve, I made all bounds be from 0 to (p-28) for the outer loops.
 for(iPRIME1=0;iPRIME1<(PRIME1-28);++iPRIME1)
 for(iPRIME2=0;iPRIME2<(PRIME2-28);++iPRIME2)
-if(iPRIME2-iPRIME1<=PRIME2-29&&iPRIME1-iPRIME2<=PRIME1-29)
 for(iPRIME3=0;iPRIME3<(PRIME3-28);++iPRIME3)
-if(iPRIME3-iPRIME1<=PRIME3-29&&iPRIME3-iPRIME2<=PRIME3-29&&iPRIME1-iPRIME3<=PRIME1-29&&iPRIME2-iPRIME3<=PRIME2-29)
-for(iPRIME4=0;iPRIME4<(PRIME4-28);++iPRIME4)
-if(iPRIME4-iPRIME1<=PRIME4-29&&iPRIME4-iPRIME2<=PRIME4-29&&iPRIME4-iPRIME3<=PRIME4-29&&iPRIME1-iPRIME4<=PRIME1-29&&iPRIME2-iPRIME4<=PRIME2-29&&iPRIME3-iPRIME4<=PRIME3-29)
 for(i3=0;i3<2;++i3)
 for(i5=0;i5<4;++i5)
 {
 
-n47=(n0+i3*S3+i5*S5+iPRIME1*SPRIME1+iPRIME2*SPRIME2+iPRIME3*SPRIME3+iPRIME4*SPRIME4)%MOD;
+
+
+
+n43=(n0+i3*S3+i5*S5+iPRIME1*SPRIME1+iPRIME2*SPRIME2+iPRIME3*SPRIME3)%MOD;
+{
+// Since we want a tighter sieve, I made all bounds be from (p-28) to 0 for the inner loops.
+for(iPRIME4=(PRIME4-28);iPRIME4>0;iPRIME4--)
 {
 
-n53=n47;
+n47=n43;
 for(iPRIME5=(PRIME5-28);iPRIME5>0;iPRIME5--)
 {
 
@@ -366,6 +368,8 @@ m-=STEP;
 };
 };
 
+
+
 if(k>=10)
 {
 ReportSolution(k,K,m+STEP);
@@ -426,13 +430,17 @@ if(n53>=MOD)n53-=MOD;
 n47+=SPRIME5;
 if(n47>=MOD)n47-=MOD;
 }
+
+n43+=SPRIME4;
+if(n43>=MOD)n43-=MOD;
+}
 };
 
 
 }
 }
 }
-else if (q != 31) {
+else {
 
 int PRIME1 = constantsList[constantsIndex][4]; // skipping index 3 is intentional
 int PRIME2 = constantsList[constantsIndex][5];
